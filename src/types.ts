@@ -1,12 +1,12 @@
-export type ModeType = 'principles' | 'tokens' | 'components' | 'layouts' | 'interaction' | 'content' | 'accessibility' | 'tooling';
+export type ModeType = 'principles' | 'tokens' | 'components' | 'layouts' | 'interaction' | 'content' | 'accessibility' | 'tooling' | 'rockaifoundations';
 
 export interface Principle {
   id: string;
   name: string;
   description: string;
   roakDetail: string;
-  m3Equivalent: string;
-  m3Detail: string;
+  rockaiEquivalent: string;
+  rockaiDetail: string;
   safetyRating: 'critical' | 'high' | 'medium';
   iconName: string;
 }

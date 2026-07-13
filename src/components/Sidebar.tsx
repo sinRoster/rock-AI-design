@@ -1,6 +1,6 @@
 import React from 'react';
 import { ModeType } from '../types';
-import { ShieldAlert, Sparkles, Layout, Layers, Activity, BookOpen, Accessibility, FileCode } from 'lucide-react';
+import { ShieldAlert, Sparkles, Layout, Layers, Activity, BookOpen, Accessibility, FileCode, Palette } from 'lucide-react';
 
 interface SidebarProps {
   currentMode: ModeType;
@@ -12,80 +12,98 @@ export default function Sidebar({ currentMode, setMode }: SidebarProps) {
     {
       id: 'principles' as ModeType,
       label: '1. 设计原则 (Principles)',
-      subLabel: '指导所有决策的顶层哲学',
+      subLabel: 'Rock-ai Core Philosophy',
       icon: ShieldAlert,
+      iconBg: 'bg-[#FF9500]', // Apple System Orange
     },
     {
       id: 'tokens' as ModeType,
       label: '2. 设计令牌 (Tokens)',
-      subLabel: '颜色、字体、间距、圆角原子变量',
+      subLabel: 'Sleek Typography & Variables',
       icon: Layers,
+      iconBg: 'bg-[#007AFF]', // Apple System Blue
     },
     {
       id: 'components' as ModeType,
       label: '3. 基础组件 (Components)',
-      subLabel: 'Button、Input、Card 沙盒',
+      subLabel: 'Rock-ai Native Sandboxes',
       icon: Sparkles,
+      iconBg: 'bg-[#5856D6]', // Apple System Purple
     },
     {
       id: 'layouts' as ModeType,
       label: '4. 布局模式 (Layout Patterns)',
-      subLabel: '页面结构、侧边停靠、2D雷达地图',
+      subLabel: 'Responsive Multi-Device Shells',
       icon: Layout,
+      iconBg: 'bg-[#30B0C7]', // Apple System Teal
     },
     {
       id: 'interaction' as ModeType,
       label: '5. 交互模式 (Interactions)',
-      subLabel: '手势阻尼、微动反馈、状态流转',
+      subLabel: 'Fluid Damping & Spring Physics',
       icon: Activity,
+      iconBg: 'bg-[#FF2D55]', // Apple System Pink
     },
     {
       id: 'content' as ModeType,
       label: '6. 内容指南 (Content Guidelines)',
-      subLabel: '文案语调、专业术语表、急停规范',
+      subLabel: 'Clear Professional Tone Guides',
       icon: BookOpen,
+      iconBg: 'bg-[#34C759]', // Apple System Green
     },
     {
       id: 'accessibility' as ModeType,
       label: '7. 无障碍 (Accessibility)',
-      subLabel: '色彩对比度计算、键盘聚焦体验',
+      subLabel: 'WCAG Contrast Ratio Engine',
       icon: Accessibility,
+      iconBg: 'bg-[#AF52DE]', // Apple System Indigo
     },
     {
       id: 'tooling' as ModeType,
       label: '8. 工具链 (Tooling)',
-      subLabel: 'Figma规范、代码导出、MD一键渲染',
+      subLabel: 'Rock-ai Specification Workspace',
       icon: FileCode,
+      iconBg: 'bg-[#8E8E93]', // Apple System Gray
+    },
+    {
+      id: 'rockaifoundations' as ModeType,
+      label: '9. Rock-AI 基石 (Rock-AI Foundations)',
+      subLabel: 'Rock-AI Design Foundations Suite',
+      icon: Palette,
+      iconBg: 'bg-[#30B0C7]', // Apple System Teal
     },
   ];
 
   return (
     <div 
-      id="roak-sidebar"
-      className="w-full md:w-80 bg-m3-muted-surface text-m3-on-surface flex flex-col border-r border-m3-outline/10 md:h-screen shrink-0"
+      id="apple-sidebar"
+      className="w-full md:w-80 bg-[#F5F5F7] text-[#1D1D1F] flex flex-col border-r border-[#D2D2D7]/50 md:h-screen shrink-0"
     >
-      {/* Brand Header */}
-      <div className="p-6 border-b border-m3-outline/15 flex items-center justify-between bg-white/45">
+      {/* Apple Sidebar Header */}
+      <div className="p-6 border-b border-[#D2D2D7]/50 flex items-center justify-between bg-white/60 backdrop-blur-xl">
         <div className="flex flex-col">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 bg-m3-primary rounded-full animate-pulse" id="brand-indicator"></span>
-            <span className="text-[10px] font-mono font-bold tracking-widest text-m3-outline">ROCK-AI DESIGN</span>
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 bg-[#34C759] rounded-full" id="apple-indicator"></span>
+            <span className="text-[10px] font-semibold tracking-wider text-[#86868B] uppercase">Human Interface Companion</span>
           </div>
-          <h1 className="text-xl font-bold tracking-tight text-m3-on-surface mt-1.5 font-serif italic">
-            MOBIUS UI SYSTEM
+          <h1 className="text-lg font-bold tracking-tight text-[#1D1D1F] mt-1 font-sans">
+            Rock-ai Design Guide
           </h1>
-          <p className="text-[10px] text-m3-outline/80 mt-1 font-mono tracking-wider">
-            V8.0 COMPANION GUIDE
+          <p className="text-[10px] text-[#86868B] font-mono">
+            macOS Custom Edition v8.1
           </p>
         </div>
-        {/* Editorial edition indicator */}
-        <span className="text-[9px] uppercase tracking-widest font-bold opacity-30 writing-mode-vertical text-m3-outline">M3_EDITION</span>
+        <div className="flex gap-1.5 shrink-0">
+          <span className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]"></span>
+          <span className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]"></span>
+          <span className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]"></span>
+        </div>
       </div>
 
-      {/* Navigation Modes */}
-      <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-        <p className="text-[10px] font-mono font-bold text-m3-outline uppercase tracking-widest px-2 mb-3">
-          MODE SELECTION
+      {/* macOS Sidebar Navigation Items */}
+      <nav className="flex-1 px-3 py-4 space-y-[2px] overflow-y-auto">
+        <p className="text-[10px] font-semibold text-[#86868B] uppercase tracking-wider px-3 mb-2">
+          Design System Levels
         </p>
         {menuItems.map((item) => {
           const Icon = item.icon;
@@ -95,36 +113,40 @@ export default function Sidebar({ currentMode, setMode }: SidebarProps) {
               key={item.id}
               id={`nav-btn-${item.id}`}
               onClick={() => setMode(item.id)}
-              className={`w-full text-left flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-200 group relative ${
+              className={`w-full text-left flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-150 group relative cursor-pointer ${
                 isActive
-                  ? 'bg-m3-primary text-white shadow-[0_4px_12px_rgba(103,80,164,0.15)] font-semibold'
-                  : 'text-m3-on-surface/70 hover:bg-m3-light-purple/40 hover:text-m3-on-surface'
+                  ? 'bg-[#0071E3] text-white font-medium shadow-sm'
+                  : 'text-[#1D1D1F]/90 hover:bg-[#E8E8ED]'
               }`}
             >
-              <Icon className={`w-5 h-5 shrink-0 transition-transform duration-300 ${isActive ? 'scale-110 text-white' : 'text-m3-primary group-hover:scale-105'}`} />
-              <div className="flex flex-col">
-                <span className="text-xs font-semibold tracking-tight leading-snug">{item.label}</span>
-                <span className={`text-[9px] font-mono mt-0.5 ${isActive ? 'text-m3-light-purple' : 'text-m3-outline group-hover:text-m3-on-surface/80'}`}>
+              {/* Apple colorful round-rect icon wrapper */}
+              <div className={`w-7 h-7 rounded-md ${item.iconBg} flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-105`}>
+                <Icon className="w-4 h-4 text-white" />
+              </div>
+              
+              <div className="flex flex-col flex-1 min-w-0">
+                <span className="text-[13px] font-medium tracking-tight truncate">{item.label}</span>
+                <span className={`text-[10px] truncate ${isActive ? 'text-white/80' : 'text-[#86868B]'}`}>
                   {item.subLabel}
                 </span>
               </div>
               
               {isActive && (
-                <span className="absolute right-4 w-1.5 h-1.5 bg-white rounded-full"></span>
+                <span className="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
               )}
             </button>
           );
         })}
       </nav>
 
-      {/* Sidebar Footer with system information */}
-      <div className="p-5 border-t border-m3-outline/10 bg-white/30 text-[10px] font-mono text-m3-outline">
-        <div className="flex items-center justify-between mb-2">
-          <span className="font-bold tracking-wider">SYSTEM INTEGRITY</span>
-          <span className="text-emerald-600 font-bold">● OK (2D SECURE)</span>
+      {/* Apple Styled Integrity Footer */}
+      <div className="p-4 border-t border-[#D2D2D7]/50 bg-white/30 backdrop-blur-md text-[10px] text-[#86868B] space-y-1">
+        <div className="flex items-center justify-between">
+          <span className="font-semibold tracking-wider text-[9px] uppercase">HIG Specification</span>
+          <span className="text-[#34C759] font-bold">● Active Sandbox</span>
         </div>
-        <div className="text-[10px] leading-relaxed opacity-85">
-          ROAK-AI Framework adheres to standard 2-stroke vector renders, optimized for tablet & desktop environments.
+        <div className="text-[10px] leading-relaxed">
+          Fluid adaptive frames rendering on native Canvas pipelines. Designed for Apple Silicon architectures.
         </div>
       </div>
     </div>

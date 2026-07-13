@@ -1,5 +1,5 @@
 {
-  "name": "ROAK-AI & Material 3 UX Companion",
+  "name": "ROCK-AI & Material 3 UX Companion",
   "description": "An interactive, visual UX design system guide built to the 8-part system taxonomy. Features principles comparison, tokens, components sandbox, adaptive layout simulators, interactive gesture damping, warning copywriting checkers, WCAG 2.1 color contrast calculators, and a Markdown-to-M3 renderer.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

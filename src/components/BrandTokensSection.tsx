@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
 import { ROAK_TYPOGRAPHY, ROAK_SPACING, ROAK_LOGO_SPECS } from '../data/roakData';
-import { M3_TYPOGRAPHY, M3_SHAPES, M3_ELEVATION } from '../data/m3Data';
+import { ROCK_AI_TYPOGRAPHY, ROCK_AI_SHAPES, ROCK_AI_ELEVATION } from '../data/rockaiData';
 import { Copy, Check, Eye, HelpCircle, Layers, Maximize2, RefreshCw } from 'lucide-react';
 import { motion } from 'motion/react';
 
+// Import shadcn/ui components
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Slider } from '@/components/ui/slider';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+
 export default function BrandTokensSection() {
-  const [inputText, setInputText] = useState('ROCK-AI MOBIUS SYSTEM V8');
-  const [selectedSystem, setSelectedSystem] = useState<'roak' | 'm3'>('roak');
+  const [inputText, setInputText] = useState('ROCK-AI SYSTEM V8');
+  const [selectedSystem, setSelectedSystem] = useState<'roak' | 'rockai'>('roak');
   const [activeTab, setActiveTab] = useState<'typography' | 'logo' | 'spacing'>('typography');
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   // Logo settings
-  const [logoColor, setLogoColor] = useState('#2563EB'); // default blue
-  const [logoBg, setLogoBg] = useState('#09090b'); // default dark bg
+  const [logoColor, setLogoColor] = useState('#0071E3'); // default Apple Blue
+  const [logoBg, setLogoBg] = useState('#1D1D1F'); // default Apple Black
   const [logoSize, setLogoSize] = useState<'badge' | 'full' | 'icon'>('badge');
 
   // Spacing Stack Settings
@@ -28,183 +36,117 @@ export default function BrandTokensSection() {
 
   return (
     <div id="brand-tokens-section" className="space-y-8 animate-fade-in">
-      {/* Tab Switcher */}
-      <div className="flex border-b border-m3-outline/20">
-        {(['typography', 'logo', 'spacing'] as const).map((tab) => (
-          <button
-            key={tab}
-            id={`token-tab-${tab}`}
-            onClick={() => setActiveTab(tab)}
-            className={`px-6 py-4 text-sm font-semibold tracking-tight transition-all duration-150 border-b-2 -mb-px cursor-pointer ${
-              activeTab === tab
-                ? 'border-m3-primary text-m3-primary font-bold font-serif italic'
-                : 'border-transparent text-m3-outline hover:text-m3-on-surface'
-            }`}
+      {/* Tab Switcher (using shadcn/ui Tabs) */}
+      <Tabs value={activeTab} onValueChange={(val) => setActiveTab(val as any)} className="w-full">
+        <TabsList variant="line" className="w-full border-b border-[#D2D2D7]/50 justify-start h-auto p-0 rounded-none bg-transparent gap-4">
+          <TabsTrigger 
+            value="typography" 
+            className="px-6 py-3.5 text-sm font-semibold tracking-tight transition-all border-b-2 data-active:border-[#0071E3] data-active:text-[#0071E3] data-active:font-bold border-transparent text-[#86868B] hover:text-[#1D1D1F] cursor-pointer rounded-none bg-transparent shadow-none font-sans"
           >
-            {tab === 'typography' && '排版与字体系统'}
-            {tab === 'logo' && 'Logo 与徽章规范'}
-            {tab === 'spacing' && '间距堆叠与面板'}
-          </button>
-        ))}
-      </div>
+            排版与字体系统
+          </TabsTrigger>
+          <TabsTrigger 
+            value="logo" 
+            className="px-6 py-3.5 text-sm font-semibold tracking-tight transition-all border-b-2 data-active:border-[#0071E3] data-active:text-[#0071E3] data-active:font-bold border-transparent text-[#86868B] hover:text-[#1D1D1F] cursor-pointer rounded-none bg-transparent shadow-none font-sans"
+          >
+            Logo 与徽章规范
+          </TabsTrigger>
+          <TabsTrigger 
+            value="spacing" 
+            className="px-6 py-3.5 text-sm font-semibold tracking-tight transition-all border-b-2 data-active:border-[#0071E3] data-active:text-[#0071E3] data-active:font-bold border-transparent text-[#86868B] hover:text-[#1D1D1F] cursor-pointer rounded-none bg-transparent shadow-none font-sans"
+          >
+            间距堆叠与面板
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
 
       {/* TYPOGRAPHY TAB */}
       {activeTab === 'typography' && (
         <div className="space-y-6">
-          {/* Typography Header */}
-          <div className="bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-[0_4px_16px_rgba(103,80,164,0.03)] space-y-4">
+          {/* Typography Header using shadcn Card and Input */}
+          <Card className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm space-y-4">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <h3 className="text-lg font-bold text-m3-on-surface font-serif">
-                  双系统字体规格对比与 <span className="italic text-m3-primary font-serif">实时演练</span>
-                </h3>
-                <p className="text-xs text-m3-outline mt-1.5 leading-relaxed">
-                  ROAK-AI 以 <strong>Roboto</strong> 为主字体，配合 <strong>Roboto Condensed</strong> 带来强硬、紧凑的工业机械感；M3 采用 <strong>Inter/Roboto</strong> 作为通用字体，注重动态弹性与阅读流畅性。
-                </p>
-              </div>
-              
-              {/* System selector */}
-              <div className="inline-flex rounded-2xl bg-m3-muted-surface p-1 border border-m3-outline/20 shrink-0">
-                <button
-                  onClick={() => setSelectedSystem('roak')}
-                  className={`px-4 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                    selectedSystem === 'roak' ? 'bg-white shadow-[0_2px_8px_rgba(103,80,164,0.08)] text-m3-on-surface' : 'text-m3-outline hover:text-m3-on-surface'
-                  }`}
-                >
-                  ROAK-AI 工业栈
-                </button>
-                <button
-                  onClick={() => setSelectedSystem('m3')}
-                  className={`px-4 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                    selectedSystem === 'm3' ? 'bg-white shadow-[0_2px_8px_rgba(103,80,164,0.08)] text-m3-on-surface' : 'text-m3-outline hover:text-m3-on-surface'
-                  }`}
-                >
-                  Material 3 消费栈
-                </button>
+                <CardTitle className="text-lg font-bold text-[#1D1D1F] font-sans mb-1">
+                  Rock-ai 字体规格与 <span className="text-[#0071E3]">实时演练</span>
+                </CardTitle>
+                <CardDescription className="text-xs text-[#86868B] leading-relaxed mt-1.5 font-sans">
+                  Rock-ai 以 <strong>Roboto / JetBrains Mono</strong> 为主，配合高密度字重带来紧凑的工业机械感，确保在特种作业场景下具备极高的信息可视性与阅读效率。
+                </CardDescription>
               </div>
             </div>
 
-            {/* Live Input Field */}
+            {/* Live Input Field using shadcn Input */}
             <div className="pt-2">
-              <label className="block text-[10px] font-mono font-bold text-m3-outline uppercase tracking-widest mb-2">
-                实时测试文本输入 (TYPE HERE)
+              <label className="block text-[10px] font-semibold text-[#86868B] uppercase tracking-wider mb-2 font-sans">
+                实时测试文本输入 (Live Specimen Input)
               </label>
-              <input
+              <Input
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                className="w-full px-4 py-3 bg-m3-muted-surface border border-m3-outline/20 rounded-2xl text-sm text-m3-on-surface focus:outline-none focus:ring-2 focus:ring-m3-primary focus:bg-white transition-all font-mono"
+                className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7]/50 rounded-xl text-sm text-[#1D1D1F] focus-visible:ring-[#0071E3] focus-visible:border-[#0071E3] transition-all font-mono h-12"
                 placeholder="请输入用于预览测试的文本..."
               />
             </div>
-          </div>
+          </Card>
 
           {/* Typography Tokens Grid */}
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-            {selectedSystem === 'roak' ? (
-              // ROAK Typography List
-              ROAK_TYPOGRAPHY.map((token, idx) => {
-                const textStyle: React.CSSProperties = {
-                  fontFamily: token.family.includes('Georgia') ? 'Georgia, serif' : token.family.includes('Consolas') ? 'Consolas, monospace' : '"Roboto", "Inter", sans-serif',
-                  fontWeight: token.weight === 'Thin' ? 100 : token.weight === 'Light' ? 300 : token.weight === 'Medium' ? 500 : token.weight === 'Bold' ? 700 : 400,
-                  fontSize: token.size,
-                  lineHeight: token.lineHeight,
-                  letterSpacing: token.letterSpacing || 'normal',
-                  textTransform: token.decoration?.includes('全大写') ? 'uppercase' : 'none',
-                };
+            {/* Rock-ai Typography List */}
+            {ROAK_TYPOGRAPHY.map((token, idx) => {
+              const textStyle: React.CSSProperties = {
+                fontFamily: token.family.includes('Georgia') ? 'Georgia, serif' : token.family.includes('Consolas') ? 'Consolas, monospace' : '"Roboto", "Inter", sans-serif',
+                fontWeight: token.weight === 'Thin' ? 100 : token.weight === 'Light' ? 300 : token.weight === 'Medium' ? 500 : token.weight === 'Bold' ? 700 : 400,
+                fontSize: token.size,
+                lineHeight: token.lineHeight,
+                letterSpacing: token.letterSpacing || 'normal',
+                textTransform: token.decoration?.includes('全大写') ? 'uppercase' : 'none',
+              };
 
-                const tailwindFontClass = token.family.includes('Consolas') ? 'font-mono' : 'font-sans';
-                const cssDeclaration = `font-family: "${token.family}";\nfont-size: ${token.size};\nfont-weight: ${token.weight};\nline-height: ${token.lineHeight};${token.letterSpacing ? `\nletter-spacing: ${token.letterSpacing};` : ''}`;
+              const tailwindFontClass = token.family.includes('Consolas') ? 'font-mono' : 'font-sans';
+              const cssDeclaration = `font-family: "${token.family}";\nfont-size: ${token.size};\nfont-weight: ${token.weight};\nline-height: ${token.lineHeight};${token.letterSpacing ? `\nletter-spacing: ${token.letterSpacing};` : ''}`;
 
-                return (
-                  <div key={idx} className="bg-white border border-m3-outline/15 rounded-[24px] p-5 shadow-[0_2px_12px_rgba(103,80,164,0.02)] space-y-4 flex flex-col justify-between hover:border-m3-primary/30 transition-all">
-                    <div>
-                      {/* Token Metadata */}
-                      <div className="flex items-center justify-between border-b border-m3-outline/10 pb-2 mb-3">
-                        <span className="text-xs font-mono font-bold text-m3-primary">{token.name}</span>
-                        <button
-                          onClick={() => handleCopy(cssDeclaration, `roak-ty-${idx}`)}
-                          className="p-1 hover:bg-m3-secondary-container/50 rounded-lg text-m3-outline hover:text-m3-on-surface transition-all"
-                          title="复制 CSS 样式"
-                        >
-                          {copiedId === `roak-ty-${idx}` ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
-                        </button>
-                      </div>
-
-                      {/* Display Text Demo */}
-                      <div className="py-4 border-b border-m3-outline/10 overflow-hidden min-h-[80px] flex items-center">
-                        <span style={textStyle} className={`${tailwindFontClass} text-m3-on-surface block break-words w-full`}>
-                          {token.decoration?.includes('全大写') ? inputText.toUpperCase() : inputText}
-                        </span>
-                      </div>
+              return (
+                <div key={idx} className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-5 shadow-sm space-y-4 flex flex-col justify-between hover:border-[#0071E3]/50 transition-all">
+                  <div>
+                    {/* Token Metadata */}
+                    <div className="flex items-center justify-between border-b border-[#D2D2D7]/40 pb-2 mb-3">
+                      <span className="text-xs font-mono font-bold text-[#0071E3]">{token.name}</span>
+                      <button
+                        onClick={() => handleCopy(cssDeclaration, `roak-ty-${idx}`)}
+                        className="p-1 hover:bg-[#F5F5F7] rounded-md text-[#86868B] hover:text-[#1D1D1F] transition-all cursor-pointer"
+                        title="复制 CSS 样式"
+                      >
+                        {copiedId === `roak-ty-${idx}` ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                      </button>
                     </div>
 
-                    {/* Usage Guideline */}
-                    <div className="space-y-1.5 pt-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-mono text-m3-outline">Specs: {token.size} • {token.weight} • LH {token.lineHeight}</span>
-                      </div>
-                      <p className="text-xs text-m3-on-surface/85 font-sans">
-                        <strong>主要用途：</strong> {token.useCase}
-                      </p>
-                      {token.decoration && (
-                        <p className="text-[10px] text-m3-outline italic font-mono bg-m3-muted-surface/55 p-2 rounded-xl border border-m3-outline/10">
-                          * {token.decoration}
-                        </p>
-                      )}
+                    {/* Display Text Demo */}
+                    <div className="py-4 border-b border-[#D2D2D7]/30 overflow-hidden min-h-[80px] flex items-center">
+                      <span style={textStyle} className={`${tailwindFontClass} text-[#1D1D1F] block break-words w-full`}>
+                        {token.decoration?.includes('全大写') ? inputText.toUpperCase() : inputText}
+                      </span>
                     </div>
                   </div>
-                );
-              })
-            ) : (
-              // M3 Typography List
-              M3_TYPOGRAPHY.map((token, idx) => {
-                const textStyle: React.CSSProperties = {
-                  fontFamily: '"Inter", "Roboto", sans-serif',
-                  fontWeight: token.weight === 'Medium' ? 500 : 400,
-                  fontSize: token.size,
-                  lineHeight: token.lineHeight,
-                  letterSpacing: token.letterSpacing || 'normal',
-                };
 
-                const cssDeclaration = `font-family: "Inter", sans-serif;\nfont-size: ${token.size};\nfont-weight: ${token.weight === 'Medium' ? 500 : 400};\nline-height: ${token.lineHeight};${token.letterSpacing ? `\nletter-spacing: ${token.letterSpacing};` : ''}`;
-
-                return (
-                  <div key={idx} className="bg-white border border-m3-outline/15 rounded-[24px] p-5 shadow-[0_2px_12px_rgba(103,80,164,0.02)] space-y-4 flex flex-col justify-between hover:border-m3-primary/30 transition-all">
-                    <div>
-                      {/* Token Metadata */}
-                      <div className="flex items-center justify-between border-b border-m3-outline/10 pb-2 mb-3">
-                        <span className="text-xs font-mono font-bold text-m3-primary">{token.name}</span>
-                        <button
-                          onClick={() => handleCopy(cssDeclaration, `m3-ty-${idx}`)}
-                          className="p-1 hover:bg-m3-secondary-container/50 rounded-lg text-m3-outline hover:text-m3-on-surface transition-all"
-                          title="复制 CSS 样式"
-                        >
-                          {copiedId === `m3-ty-${idx}` ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
-                        </button>
-                      </div>
-
-                      {/* Display Text Demo */}
-                      <div className="py-4 border-b border-m3-outline/10 overflow-hidden min-h-[80px] flex items-center">
-                        <span style={textStyle} className="font-sans text-m3-on-surface block break-words w-full">
-                          {inputText}
-                        </span>
-                      </div>
+                  {/* Usage Guideline */}
+                  <div className="space-y-1.5 pt-2 font-sans">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-mono text-[#86868B]">Specs: {token.size} • {token.weight} • LH {token.lineHeight}</span>
                     </div>
-
-                    {/* Usage Guideline */}
-                    <div className="space-y-1.5 pt-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-mono text-m3-outline">Specs: {token.size} • {token.weight} • LH {token.lineHeight}</span>
-                      </div>
-                      <p className="text-xs text-m3-on-surface/85 font-sans">
-                        <strong>建议用途：</strong> {token.useCase}
+                    <p className="text-xs text-[#1D1D1F]/90">
+                      <strong>主要用途：</strong> {token.useCase}
+                    </p>
+                    {token.decoration && (
+                      <p className="text-[10px] text-[#86868B] italic font-mono bg-[#F5F5F7] p-2 rounded-lg border border-[#D2D2D7]/40">
+                        * {token.decoration}
                       </p>
-                    </div>
+                    )}
                   </div>
-                );
-              })
-            )}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
@@ -215,21 +157,21 @@ export default function BrandTokensSection() {
           
           {/* Logo Controller Dashboard */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white border border-m3-outline/15 rounded-[28px] p-5 shadow-[0_4px_16px_rgba(103,80,164,0.03)] space-y-4">
-              <h4 className="text-xs font-mono font-bold text-zinc-400 uppercase tracking-widest">
+            <div className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-5 shadow-sm space-y-4 font-sans">
+              <h4 className="text-xs font-bold text-[#86868B] uppercase tracking-wider">
                 Logo 渲染与对比度测试
               </h4>
               
               {/* Select Logo Style */}
               <div className="space-y-1.5">
-                <label className="text-xs text-m3-outline font-medium block">Logo 类型规格</label>
-                <div className="grid grid-cols-3 gap-1 bg-m3-muted-surface p-1 rounded-xl border border-m3-outline/10">
+                <label className="text-xs text-[#86868B] font-medium block">Logo 类型规格</label>
+                <div className="grid grid-cols-3 gap-1 bg-[#F5F5F7] p-1 rounded-xl border border-[#D2D2D7]/30">
                   {(['badge', 'full', 'icon'] as const).map((type) => (
                     <button
                       key={type}
                       onClick={() => setLogoSize(type)}
                       className={`py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
-                        logoSize === type ? 'bg-white shadow-[0_2px_8px_rgba(103,80,164,0.08)] text-m3-on-surface' : 'text-m3-outline hover:text-m3-on-surface'
+                        logoSize === type ? 'bg-white shadow-sm text-[#1D1D1F]' : 'text-[#86868B] hover:text-[#1D1D1F]'
                       }`}
                     >
                       {type === 'badge' && '齿轮徽章'}
@@ -242,22 +184,22 @@ export default function BrandTokensSection() {
 
               {/* Select Logo Tint */}
               <div className="space-y-1.5">
-                <label className="text-xs text-m3-outline font-medium block">Logo 授权色</label>
+                <label className="text-xs text-[#86868B] font-medium block">Logo 授权色</label>
                 <div className="grid grid-cols-4 gap-1">
                   {[
-                    { hex: '#2563EB', name: '经典蓝' },
-                    { hex: '#1E3A8A', name: '藏青蓝' },
-                    { hex: '#000000', name: '全黑' },
-                    { hex: '#FFFFFF', name: '纯白' }
+                    { hex: '#0071E3', name: '苹果蓝' },
+                    { hex: '#1D1D1F', name: '深炭黑' },
+                    { hex: '#FF9500', name: '橙黄警示' },
+                    { hex: '#FFFFFF', name: '精白' }
                   ].map((color) => (
                     <button
                       key={color.hex}
                       onClick={() => setLogoColor(color.hex)}
                       className={`py-1 px-1 border text-[10px] font-bold rounded-xl flex flex-col items-center gap-1 cursor-pointer transition-all ${
-                        logoColor === color.hex ? 'border-m3-primary/50 bg-m3-primary/10 text-m3-primary' : 'border-m3-outline/20 hover:bg-m3-muted-surface'
+                        logoColor === color.hex ? 'border-[#0071E3]/50 bg-[#0071E3]/10 text-[#0071E3]' : 'border-[#D2D2D7]/40 hover:bg-[#F5F5F7]'
                       }`}
                     >
-                      <span className="w-4 h-4 rounded-full border border-zinc-300" style={{ backgroundColor: color.hex }}></span>
+                      <span className="w-4 h-4 rounded-full border border-zinc-300 shadow-inner" style={{ backgroundColor: color.hex }}></span>
                       <span>{color.name}</span>
                     </button>
                   ))}
@@ -266,18 +208,18 @@ export default function BrandTokensSection() {
 
               {/* Select Background for Contrast Check */}
               <div className="space-y-1.5">
-                <label className="text-xs text-m3-outline font-medium block">背景底色测试</label>
-                <div className="grid grid-cols-3 gap-1 bg-m3-muted-surface p-1 rounded-xl border border-m3-outline/10">
+                <label className="text-xs text-[#86868B] font-medium block">背景底色测试</label>
+                <div className="grid grid-cols-3 gap-1 bg-[#F5F5F7] p-1 rounded-xl border border-[#D2D2D7]/30">
                   {[
-                    { hex: '#09090b', name: '深色底' },
-                    { hex: '#f4f4f5', name: '浅灰底' },
+                    { hex: '#1D1D1F', name: '黑色底' },
+                    { hex: '#F5F5F7', name: '浅灰底' },
                     { hex: '#ffffff', name: '白背景' }
                   ].map((bg) => (
                     <button
                       key={bg.hex}
                       onClick={() => setLogoBg(bg.hex)}
-                      className={`py-1 text-xs rounded-lg transition-all cursor-pointer ${
-                        logoBg === bg.hex ? 'bg-m3-primary text-white shadow-sm' : 'text-m3-outline hover:text-m3-on-surface'
+                      className={`py-1 text-xs rounded-lg transition-all cursor-pointer font-medium ${
+                        logoBg === bg.hex ? 'bg-[#0071E3] text-white shadow-sm' : 'text-[#86868B] hover:text-[#1D1D1F]'
                       }`}
                     >
                       {bg.name}
@@ -288,42 +230,42 @@ export default function BrandTokensSection() {
             </div>
 
             {/* Constraints Checklist */}
-            <div className="bg-zinc-900 text-zinc-200 rounded-[28px] p-5 border border-zinc-800 space-y-4">
-              <h4 className="text-xs font-mono font-bold text-zinc-400 uppercase tracking-widest">
-                ROAK-AI LOGO 设计硬指标限制
+            <div className="bg-[#1D1D1F] text-white rounded-2xl p-5 border border-[#D2D2D7]/30 space-y-4">
+              <h4 className="text-xs font-semibold text-[#86868B] uppercase tracking-wider font-sans">
+                Rock-ai LOGO 设计硬指标限制
               </h4>
-              <ul className="text-xs space-y-3 font-sans text-zinc-400">
+              <ul className="text-xs space-y-3 font-sans text-[#86868B]">
                 <li className="flex gap-2 items-start">
-                  <span className="text-blue-500 mt-0.5">✔</span>
-                  <span><strong>2:1 宽高比：</strong> 徽章（Badge）的外围结构必须满足精确的 2:1 长宽尺寸比率。</span>
+                  <span className="text-[#0071E3] mt-0.5">✔</span>
+                  <span className="text-white/80"><strong>2:1 宽高比：</strong> 徽章（Badge）的外围结构必须满足精确的 2:1 长宽尺寸比率。</span>
                 </li>
                 <li className="flex gap-2 items-start">
-                  <span className="text-blue-500 mt-0.5">✔</span>
-                  <span><strong>中心锚定：</strong> 指南针刻度盘必须完美居中于上半部分，下半部分承接齿轮咬合轮廓。</span>
+                  <span className="text-[#0071E3] mt-0.5">✔</span>
+                  <span className="text-white/80"><strong>中心锚定：</strong> 指南针刻度盘必须完美居中于上半部分，下半部分承接齿轮咬合轮廓。</span>
                 </li>
                 <li className="flex gap-2 items-start">
-                  <span className="text-red-500 mt-0.5">✘</span>
-                  <span><strong>禁止白色上用徽标：</strong> 绝对禁止在纯白背景上直接放置齿轮徽章（因为细节易淹没，极易造成低反差导致识别困难）。</span>
+                  <span className="text-[#FF3B30] mt-0.5">✘</span>
+                  <span className="text-white/80"><strong>禁止白色上用徽标：</strong> 绝对禁止在纯白背景上直接放置齿轮徽章（因为细节易淹没，极易造成识别困难）。</span>
                 </li>
               </ul>
             </div>
           </div>
 
           {/* Logo Real-Time Interactive Canvas */}
-          <div className="lg:col-span-7 flex flex-col justify-between bg-m3-muted-surface/40 rounded-[28px] border border-m3-outline/15 p-6 min-h-[340px]">
+          <div className="lg:col-span-7 flex flex-col justify-between bg-white rounded-2xl border border-[#D2D2D7]/50 p-6 min-h-[340px]">
             <div>
               <div className="flex justify-between items-center mb-4">
-                <span className="text-xs font-mono font-bold text-zinc-400">INTERACTIVE GRAPHIC CANVAS</span>
+                <span className="text-xs font-semibold text-[#86868B] font-sans">INTERACTIVE GRAPHIC CANVAS</span>
                 {logoBg === '#ffffff' && logoColor === '#FFFFFF' ? (
-                  <span className="text-xs font-mono text-red-500 font-bold bg-red-100 px-2 py-0.5 rounded border border-red-300 animate-pulse">
+                  <span className="text-xs font-semibold text-[#FF3B30] bg-[#FF3B30]/10 px-2.5 py-1 rounded-full border border-[#FF3B30]/20 animate-pulse font-sans">
                     ⚠️ 严重警告：纯白 Logo 在纯白背景中不可见！
                   </span>
                 ) : logoBg === '#ffffff' && logoSize === 'badge' ? (
-                  <span className="text-xs font-mono text-amber-600 font-bold bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                  <span className="text-xs font-semibold text-[#FF9500] bg-[#FF9500]/10 px-2.5 py-1 rounded-full border border-[#FF9500]/20 font-sans">
                     ⚠️ 规范警示：禁止在白底使用齿轮徽章！
                   </span>
                 ) : (
-                  <span className="text-xs font-mono text-emerald-500 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                  <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 font-sans">
                     符合对比度要求
                   </span>
                 )}
@@ -331,11 +273,11 @@ export default function BrandTokensSection() {
 
               {/* Dynamic Logo Viewport */}
               <div
-                className="w-full h-64 rounded-lg flex items-center justify-center relative overflow-hidden shadow-inner border border-zinc-300 transition-colors duration-300"
+                className="w-full h-64 rounded-xl flex items-center justify-center relative overflow-hidden shadow-inner border border-[#D2D2D7]/40 transition-colors duration-300"
                 style={{ backgroundColor: logoBg }}
               >
                 {/* SVG Badge Construction Guides */}
-                <div className="absolute inset-0 border border-dashed border-zinc-400/20 pointer-events-none grid grid-cols-6 grid-rows-6">
+                <div className="absolute inset-0 border border-dashed border-zinc-400/10 pointer-events-none grid grid-cols-6 grid-rows-6">
                   {Array.from({ length: 36 }).map((_, i) => (
                     <div key={i} className="border-[0.5px] border-zinc-400/5"></div>
                   ))}
@@ -345,8 +287,8 @@ export default function BrandTokensSection() {
                   <div className="relative flex flex-col items-center">
                     {/* Visual 2:1 Outer box guide */}
                     <div className="absolute -inset-4 border border-zinc-500/20 rounded pointer-events-none flex flex-col items-center">
-                      <span className="text-[9px] font-mono text-zinc-500 absolute -top-4">72px</span>
-                      <span className="text-[9px] font-mono text-zinc-500 absolute -left-10 top-1/2 -translate-y-1/2 rotate-90">144px (2:1 Ratio)</span>
+                      <span className="text-[9px] font-mono text-[#86868B] absolute -top-4">72px</span>
+                      <span className="text-[9px] font-mono text-[#86868B] absolute -left-10 top-1/2 -translate-y-1/2 rotate-90">144px (2:1 Ratio)</span>
                     </div>
 
                     {/* SVG Render representing the ROAK Badge */}
@@ -388,7 +330,7 @@ export default function BrandTokensSection() {
                       <polygon points="22,12 28,26 22,32 16,26" fill={logoColor} />
                     </svg>
                     <div className="flex flex-col">
-                      <span className="font-extrabold text-2xl tracking-widest" style={{ color: logoColor }}>MOBIUS</span>
+                      <span className="font-extrabold text-2xl tracking-widest font-sans" style={{ color: logoColor }}>ROCK-AI</span>
                       <span className="text-[10px] font-mono tracking-widest" style={{ color: logoColor, opacity: 0.7 }}>ROCK-AI SYSTEM</span>
                     </div>
                   </div>
@@ -405,18 +347,20 @@ export default function BrandTokensSection() {
               </div>
             </div>
 
-            <div className="bg-m3-muted-surface p-3 rounded-xl border border-m3-outline/10 mt-4 flex items-center justify-between text-xs text-m3-outline font-mono">
+            <div className="bg-[#F5F5F7] p-3 rounded-xl border border-[#D2D2D7]/40 mt-4 flex items-center justify-between text-xs text-[#86868B] font-mono">
               <span>Selected Specs: {logoSize === 'badge' ? '72x144 px (Badge)' : logoSize === 'full' ? '47x105 px (Full)' : '44x47 px (Icon)'}</span>
-              <button 
+              <Button 
+                variant="ghost"
+                size="xs"
                 onClick={() => {
-                  setLogoColor('#2563EB');
-                  setLogoBg('#09090b');
+                  setLogoColor('#0071E3');
+                  setLogoBg('#1D1D1F');
                   setLogoSize('badge');
                 }}
-                className="flex items-center gap-1 hover:text-m3-primary text-m3-outline text-[11px] cursor-pointer"
+                className="flex items-center gap-1 hover:text-[#0071E3] text-[#86868B] text-[11px] cursor-pointer h-7 rounded-lg"
               >
                 <RefreshCw className="w-3 h-3" /> 重置画布
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -426,68 +370,76 @@ export default function BrandTokensSection() {
       {/* SPACING TAB */}
       {activeTab === 'spacing' && (
         <div className="space-y-6">
-          <div className="bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-[0_4px_16px_rgba(103,80,164,0.03)] space-y-4">
-            <h3 className="text-lg font-bold text-m3-on-surface font-serif">
-              "Down & Right Only" (向下向右堆叠) <span className="italic text-m3-primary font-serif">间距原理演练</span>
-            </h3>
-            <p className="text-xs text-m3-outline leading-relaxed mt-1.5">
-              ROAK-AI 系统强制：<strong>间距（Margins 与 Paddings）一律朝下、朝右推移</strong>。这一设计法则可防止在流式、自适应布局中组件间发生间距崩塌或重叠，特别适合大规模列表和动态面板堆积。
-            </p>
+          <Card className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm space-y-4">
+            <CardHeader className="p-0">
+              <CardTitle className="text-lg font-bold text-[#1D1D1F] font-sans">
+                "Down & Right Only" (向下向右堆叠) <span className="text-[#0071E3]">间距原理演练</span>
+              </CardTitle>
+              <CardDescription className="text-xs text-[#86868B] leading-relaxed mt-1.5 font-sans">
+                Rock-ai 系统强制：<strong>间距（Margins 与 Paddings）一律朝下、朝右推移</strong>。这一设计法则可防止在流式、自适应布局中组件间发生间距崩塌或重叠，与 Apple HIG 弹性流布局高度相似。
+              </CardDescription>
+            </CardHeader>
 
-            {/* Simulated controller */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-3 border-t border-m3-outline/10">
-              <div className="space-y-1.5">
-                <label className="text-xs text-m3-outline font-medium block">
-                  模拟项目数量 ({boxCount} 个子项)
-                </label>
-                <input
-                  type="range"
-                  min="2"
-                  max="6"
-                  value={boxCount}
-                  onChange={(e) => setBoxCount(Number(e.target.value))}
-                  className="w-full accent-m3-primary cursor-pointer"
-                />
+            {/* Simulated controller using shadcn/ui Slider */}
+            <CardContent className="p-0 grid grid-cols-1 md:grid-cols-3 gap-8 pt-6 border-t border-[#D2D2D7]/40">
+              <div className="space-y-3 font-sans">
+                <div className="flex justify-between items-center text-xs font-semibold text-[#86868B]">
+                  <span>模拟项目数量</span>
+                  <span className="font-mono bg-[#F5F5F7] px-2 py-0.5 rounded text-[#0071E3]">{boxCount} 个子项</span>
+                </div>
+                <div className="pt-1.5">
+                  <Slider
+                    min={2}
+                    max={6}
+                    value={[boxCount]}
+                    onValueChange={(val) => setBoxCount(val[0])}
+                    className="w-full"
+                  />
+                </div>
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-xs text-m3-outline font-medium block">
-                  朝下/朝右外边距 (Margin: {marginValue}px)
-                </label>
-                <input
-                  type="range"
-                  min="4"
-                  max="32"
-                  value={marginValue}
-                  onChange={(e) => setMarginValue(Number(e.target.value))}
-                  className="w-full accent-m3-primary cursor-pointer"
-                />
+              <div className="space-y-3 font-sans">
+                <div className="flex justify-between items-center text-xs font-semibold text-[#86868B]">
+                  <span>朝下/朝右外边距</span>
+                  <span className="font-mono bg-[#F5F5F7] px-2 py-0.5 rounded text-[#0071E3]">Margin: {marginValue}px</span>
+                </div>
+                <div className="pt-1.5">
+                  <Slider
+                    min={4}
+                    max={32}
+                    value={[marginValue]}
+                    onValueChange={(val) => setMarginValue(val[0])}
+                    className="w-full"
+                  />
+                </div>
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-xs text-m3-outline font-medium block">
-                  面板内边距 (Padding: {paddingValue}px)
-                </label>
-                <input
-                  type="range"
-                  min="8"
-                  max="32"
-                  value={paddingValue}
-                  onChange={(e) => setPaddingValue(Number(e.target.value))}
-                  className="w-full accent-m3-primary cursor-pointer"
-                />
+              <div className="space-y-3 font-sans">
+                <div className="flex justify-between items-center text-xs font-semibold text-[#86868B]">
+                  <span>面板内边距</span>
+                  <span className="font-mono bg-[#F5F5F7] px-2 py-0.5 rounded text-[#0071E3]">Padding: {paddingValue}px</span>
+                </div>
+                <div className="pt-1.5">
+                  <Slider
+                    min={8}
+                    max={32}
+                    value={[paddingValue]}
+                    onValueChange={(val) => setPaddingValue(val[0])}
+                    className="w-full"
+                  />
+                </div>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
             {/* Margins Demo Container */}
-            <div className="lg:col-span-8 bg-[#131118] border border-m3-outline/25 rounded-[28px] p-6 flex flex-col justify-between">
+            <div className="lg:col-span-8 bg-[#1D1D1F] border border-[#D2D2D7]/50 rounded-2xl p-6 flex flex-col justify-between">
               <div>
-                <div className="flex justify-between items-center mb-6">
-                  <span className="text-xs font-mono font-bold text-m3-outline">STACK VISUALIZER (MOBIUS PRINCIPLE)</span>
-                  <span className="text-[10px] bg-m3-primary/10 text-m3-primary px-2.5 py-1 border border-m3-primary/25 rounded-xl font-mono">
+                <div className="flex justify-between items-center mb-6 font-sans">
+                  <span className="text-xs font-semibold text-white/70 uppercase">STACK VISUALIZER (ROCK-AI PRINCIPLE)</span>
+                  <span className="text-[10px] bg-[#0071E3]/20 text-[#0071E3] px-2.5 py-1 border border-[#0071E3]/30 rounded-full font-mono">
                     MARGIN-BOTTOM & MARGIN-RIGHT ONLY
                   </span>
                 </div>
@@ -556,56 +508,66 @@ export default function BrandTokensSection() {
                 </div>
               </div>
 
-              <div className="text-[11px] font-mono text-zinc-400 mt-4 leading-relaxed bg-zinc-900/60 p-4 rounded-2xl border border-zinc-800">
-                <span className="text-m3-primary font-bold">优势分析：</span> 
+              <div className="text-[11px] font-sans text-[#86868B] mt-4 leading-relaxed bg-zinc-950 p-4 rounded-xl border border-zinc-800">
+                <span className="text-[#0071E3] font-bold">优势分析：</span> 
                 相比于使用双向边距（如 margin: 8px 16px），仅向下向右推动的单向对齐法能够实现最稳定的元素追加。在编写数据驱动的无限网格、表格或组件拼接时，消除了上边距重叠（Collapse Margin）导致的各种恶性抖动与断裂。
               </div>
             </div>
 
-            {/* M3 Space Scale & Shapes */}
+            {/* Apple Space Scale & Shapes */}
             <div className="lg:col-span-4 space-y-6">
               
-              {/* M3 Rounding Scale */}
-              <div className="bg-white border border-m3-outline/15 rounded-[28px] p-5 shadow-[0_4px_16px_rgba(103,80,164,0.03)] space-y-4">
-                <h4 className="text-xs font-mono font-bold text-m3-primary uppercase tracking-widest">
-                  Material 3 Shapes (圆角体系)
+              {/* Apple Rounding Scale */}
+              <div className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-5 shadow-sm space-y-4 font-sans">
+                <h4 className="text-xs font-bold text-[#0071E3] uppercase tracking-wider">
+                  Apple HIG Squircle Rounding (圆角体系)
                 </h4>
                 <div className="space-y-2">
-                  {M3_SHAPES.slice(1).map((shape, i) => (
-                    <div key={i} className="flex items-center gap-3 p-2 bg-m3-muted-surface border border-m3-outline/10 rounded-xl hover:border-m3-primary/30 transition-all">
+                  {[
+                    { name: 'App Icon / Squircle', value: '22px', usage: '适用于 iOS/macOS 桌面图标，完美的连续曲率圆角' },
+                    { name: 'Standard Dialog', value: '16px', usage: '适用于系统弹窗、功能对话框与核心内容大卡片' },
+                    { name: 'Component Card', value: '12px', usage: '适用于中型控制面板、操作卡片与选项卡布局' },
+                    { name: 'Pills & Segmented', value: '9999px', usage: '适用于滑动胶囊、按钮、药丸形态搜索框与状态标定' }
+                  ].map((shape, i) => (
+                    <div key={i} className="flex items-center gap-3 p-2 bg-[#F5F5F7] border border-[#D2D2D7]/30 rounded-xl hover:border-[#0071E3]/30 transition-all">
                       {/* Rounding block demo */}
                       <div 
-                        className="w-10 h-10 bg-m3-primary shrink-0 shadow-inner flex items-center justify-center text-[10px] font-mono text-white font-bold"
+                        className="w-10 h-10 bg-[#0071E3] shrink-0 shadow-inner flex items-center justify-center text-[10px] font-mono text-white font-bold"
                         style={{ borderRadius: shape.value }}
                       >
-                        M3
+                        iOS
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-xs font-bold text-m3-on-surface">{shape.name} ({shape.value})</span>
-                        <span className="text-[10px] text-m3-outline mt-0.5">{shape.usage}</span>
+                        <span className="text-xs font-bold text-[#1D1D1F]">{shape.name} ({shape.value})</span>
+                        <span className="text-[10px] text-[#86868B] mt-0.5">{shape.usage}</span>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* M3 Elevations */}
-              <div className="bg-white border border-m3-outline/15 rounded-[28px] p-5 shadow-[0_4px_16px_rgba(103,80,164,0.03)] space-y-4">
-                <h4 className="text-xs font-mono font-bold text-m3-primary uppercase tracking-widest">
-                  Material 3 Tonal Elevation (高度色阶)
+              {/* Apple Depth & Shadows */}
+              <div className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-5 shadow-sm space-y-4 font-sans">
+                <h4 className="text-xs font-bold text-[#0071E3] uppercase tracking-wider">
+                  Apple Subtle Depth & Material Layering (高分散光影)
                 </h4>
-                <p className="text-[11px] text-m3-outline leading-relaxed">
-                  M3 摒弃了传统的沉重黑色阴影，改用<strong>彩色半透明叠加层（Tonal Overlay）</strong>和轻盈影子体现深度。高度（Level 0-5）越高，色彩中叠加的 Primary 比例越大。
+                <p className="text-[11px] text-[#86868B] leading-relaxed">
+                  Apple HIG 摒弃了传统的沉重黑色阴影，改用<strong>极高扩散率、极低不透明度的空气光影（High Diffusion Shadow）</strong>和一到两层半透明磨砂背板（Mica / Material Material Overlay）体现物理层次。
                 </p>
                 <div className="space-y-1.5">
-                  {M3_ELEVATION.slice(0, 4).map((el, idx) => (
+                  {[
+                    { level: 'Airy Window', overlay: 'Mica Glassmorphism', shadow: 'shadow-[0_12px_40px_rgba(0,0,0,0.04)] bg-white/80 backdrop-blur-md' },
+                    { level: 'Action Drawer', overlay: 'Vibrant Light Material', shadow: 'shadow-[0_8px_24px_rgba(0,0,0,0.03)] bg-white' },
+                    { level: 'Dropdown Menu', overlay: 'Thick Semi-Transparent', shadow: 'shadow-[0_4px_16px_rgba(0,0,0,0.03)] bg-white/90' },
+                    { level: 'Hovered Card', overlay: 'Base White', shadow: 'shadow-sm border border-[#D2D2D7]/60' }
+                  ].map((el, idx) => (
                     <div 
                       key={idx} 
-                      className={`p-3 bg-white border border-m3-outline/10 rounded-xl flex items-center justify-between text-xs hover:scale-[1.01] transition-transform ${el.shadow}`}
+                      className={`p-3 border border-[#D2D2D7]/30 rounded-xl flex items-center justify-between text-xs hover:scale-[1.01] transition-all ${el.shadow}`}
                     >
-                      <span className="font-semibold text-m3-on-surface">Level {el.level}</span>
-                      <span className="text-[10px] font-mono text-m3-primary bg-m3-primary/10 px-2.5 py-1 rounded-xl border border-m3-primary/20">
-                        Overlay: {el.overlay}
+                      <span className="font-semibold text-[#1D1D1F]">{el.level}</span>
+                      <span className="text-[10px] font-mono text-[#0071E3] bg-[#0071E3]/5 px-2.5 py-1 rounded-full border border-[#0071E3]/10">
+                        {el.overlay}
                       </span>
                     </div>
                   ))}

@@ -1,6 +1,6 @@
 import { TypographyToken } from '../types';
 
-export const M3_TYPOGRAPHY: TypographyToken[] = [
+export const ROCK_AI_TYPOGRAPHY: TypographyToken[] = [
   {
     name: 'Display Large (特大显示)',
     family: 'Inter / Roboto',
@@ -73,7 +73,7 @@ export const M3_TYPOGRAPHY: TypographyToken[] = [
   }
 ];
 
-export const M3_ELEVATION = [
+export const ROCK_AI_ELEVATION = [
   { level: 0, shadow: 'none', overlay: '0%', description: 'Flat (平铺) - 对应页面最低底层底板，如整个视口背景。' },
   { level: 1, shadow: 'shadow-sm', overlay: '5%', description: 'Level 1 - 卡片默认高度，用于基本项目卡片、设置列表项目。' },
   { level: 2, shadow: 'shadow', overlay: '8%', description: 'Level 2 - 悬停或高亮卡片、浮动控制栏（如搜索栏）。' },
@@ -82,7 +82,7 @@ export const M3_ELEVATION = [
   { level: 5, shadow: 'shadow-xl', overlay: '14%', description: 'Level 5 - 绝对顶层，例如正在拖动的列表卡片、高优先级警告弹窗。' }
 ];
 
-export const M3_SHAPES = [
+export const ROCK_AI_SHAPES = [
   { name: 'None (直角)', value: '0px', usage: '屏幕边缘、拼贴无缝列表、传统表格单元格。' },
   { name: 'Extra Small (微圆角)', value: '4px', usage: '徽章 (Badges)、输入框里的微标记。' },
   { name: 'Small (小圆角)', value: '8px', usage: '标准输入框 (Text fields)、多选框、芯片 (Chips)。' },
@@ -92,11 +92,11 @@ export const M3_SHAPES = [
   { name: 'Full (全圆角/胶囊型)', value: '9999px', usage: '高频按钮 (FAB)、各种胶囊按钮、滑块轨道。' }
 ];
 
-export const M3_STATE_LAYERS = {
+export const ROCK_AI_STATE_LAYERS = {
   hover: '8% 纯色叠加 (视觉高亮反馈)',
   focus: '12% 纯色叠加 + 1px 外边框线',
   pressed: '12% 纯色叠加 (按下、涟漪波纹动画起动)',
   dragged: '16% 纯色叠加 + 影子升级提升'
 };
 
-export const M3_DYNAMIC_COLOR_DECS = 'M3 的核心灵魂是 Material You 动态颜色系统。系统可以提取用户壁纸中的主色调，然后使用数学算法动态计算出 30 多种色调的协调色盘。这涵盖了 Primary、Secondary、Tertiary、Error、Surface 及其对应的 On- 颜色（如 On-Primary，用于主背景色上的文字），确保在任何壁纸下都有出色的无障碍对比度。';
+export const ROCK_AI_DYNAMIC_COLOR_DECS = 'Rock-ai 的核心灵魂是 8.0 动态颜色系统。系统可以提取用户壁纸中的主色调，然后使用数学算法动态计算出 30 多种色调的协调色盘。这涵盖了 Primary、Secondary、Tertiary、Error、Surface 及其对应的 On- 颜色（如 On-Primary，用于主背景色上的文字），确保在任何壁纸下都有出色的无障碍对比度。';

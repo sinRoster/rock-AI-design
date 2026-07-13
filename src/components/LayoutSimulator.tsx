@@ -103,9 +103,9 @@ export default function LayoutSimulator() {
 
   // Asset icon mapper
   const getAssetIcon = (type: string, status: string) => {
-    let baseColor = 'text-blue-500';
-    if (status === 'warning') baseColor = 'text-amber-500';
-    if (status === 'critical') baseColor = 'text-red-500';
+    let baseColor = 'text-[#0071E3]';
+    if (status === 'warning') baseColor = 'text-[#FF9500]';
+    if (status === 'critical') baseColor = 'text-[#FF3B30]';
 
     switch (type) {
       case 'vehicle':
@@ -123,28 +123,28 @@ export default function LayoutSimulator() {
     <div id="layout-simulator-section" className="space-y-6 animate-fade-in">
       
       {/* Upper Mode Banner */}
-      <div className="bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-[0_4px_16px_rgba(103,80,164,0.03)] flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h3 className="text-lg font-bold text-m3-on-surface font-serif flex items-center gap-2">
-            <span className="w-1.5 h-6 bg-m3-primary rounded-full inline-block"></span>
-            自适应视口布局与 <span className="italic text-m3-primary font-serif">2D 地图仿真</span>
+          <h3 className="text-lg font-bold text-[#1D1D1F] font-sans flex items-center gap-2">
+            <span className="w-1.5 h-6 bg-[#0071E3] rounded-full inline-block"></span>
+            自适应视口布局与 <span className="text-[#0071E3] font-sans">2D 地图仿真</span>
           </h3>
-          <p className="text-xs text-m3-outline mt-1 font-sans">
-            ROAK-AI 针对不同设备尺寸提供了三种极致精炼的骨架。以下模拟高算力矿区调度系统的 2D 纯平地图。
+          <p className="text-xs text-[#86868B] mt-1 font-sans">
+            针对不同设备尺寸提供了三种极致精炼的骨架。以下模拟高算力矿区调度系统的 2D 纯平地图。
           </p>
         </div>
 
         {/* Layout forms switcher */}
-        <div className="flex bg-m3-muted-surface p-1 border border-m3-outline/10 rounded-xl self-stretch md:self-auto">
+        <div className="flex bg-[#F5F5F7] p-1 border border-[#D2D2D7]/30 rounded-xl self-stretch md:self-auto gap-1">
           {(['single', 'master-detail', 'map'] as const).map((type) => (
             <button
               key={type}
               id={`layout-selector-${type}`}
               onClick={() => setLayoutType(type)}
-              className={`flex-1 md:flex-none px-4.5 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
+              className={`flex-1 md:flex-none px-4 py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
                 layoutType === type 
-                  ? 'bg-white shadow-[0_2px_8px_rgba(103,80,164,0.08)] text-m3-on-surface font-bold' 
-                  : 'text-m3-outline hover:text-m3-primary'
+                  ? 'bg-white shadow-sm text-[#1D1D1F] font-bold' 
+                  : 'text-[#86868B] hover:text-[#0071E3]'
               }`}
             >
               {type === 'single' && '单一视图'}
@@ -157,30 +157,30 @@ export default function LayoutSimulator() {
 
       {/* SINGLE VIEW LAYOUT */}
       {layoutType === 'single' && (
-        <div className="bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-[0_4px_16px_rgba(103,80,164,0.03)] space-y-6">
-          <div className="border-b border-m3-outline/10 pb-4">
-            <span className="text-[10px] font-mono font-bold text-m3-primary uppercase tracking-widest block">ROAK SINGLE LAYOUT FORM</span>
-            <h4 className="text-sm font-bold text-m3-on-surface mt-1 font-serif">最简单一容器结构 (Single Panel Layout)</h4>
-            <p className="text-xs text-m3-outline mt-1 leading-relaxed">
+        <div className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm space-y-6 font-sans">
+          <div className="border-b border-[#D2D2D7]/30 pb-4">
+            <span className="text-[10px] font-mono font-bold text-[#0071E3] uppercase tracking-widest block">SINGLE LAYOUT FORM</span>
+            <h4 className="text-sm font-bold text-[#1D1D1F] mt-1">最简单一容器结构 (Single Panel Layout)</h4>
+            <p className="text-xs text-[#86868B] mt-1 leading-relaxed">
               不包含侧栏或次级抽屉，所有的表格或参数在同一面板（Panel）内聚合。常态为静止，二级页面时后退按钮将替换根目录按钮，保持空间层级。
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="border border-m3-outline/10 bg-m3-muted-surface rounded-2xl p-5 hover:border-m3-primary/30 transition-all">
-              <span className="text-[10px] font-mono font-bold text-m3-primary">01 / ROOT STAGE</span>
-              <p className="text-xs font-bold text-m3-on-surface mt-2 font-sans">常态静止主面板</p>
-              <p className="text-xs text-m3-outline mt-1 leading-relaxed">没有浮夸的侧边栏，页面元素保持绝对对称性。</p>
+            <div className="border border-[#D2D2D7]/40 bg-[#F5F5F7] rounded-xl p-5 hover:border-[#0071E3]/40 transition-all">
+              <span className="text-[10px] font-mono font-bold text-[#0071E3]">01 / ROOT STAGE</span>
+              <p className="text-xs font-bold text-[#1D1D1F] mt-2">常态静止主面板</p>
+              <p className="text-xs text-[#86868B] mt-1 leading-relaxed">没有浮夸的侧边栏，页面元素保持绝对对称性。</p>
             </div>
-            <div className="border border-m3-outline/10 bg-m3-muted-surface rounded-2xl p-5 hover:border-m3-primary/30 transition-all">
-              <span className="text-[10px] font-mono font-bold text-m3-primary">02 / INTERACTION</span>
-              <p className="text-xs font-bold text-m3-on-surface mt-2 font-sans">二级详情跳转</p>
-              <p className="text-xs text-m3-outline mt-1 leading-relaxed">左右横向动画平移（View panel animation）滑动。</p>
+            <div className="border border-[#D2D2D7]/40 bg-[#F5F5F7] rounded-xl p-5 hover:border-[#0071E3]/40 transition-all">
+              <span className="text-[10px] font-mono font-bold text-[#0071E3]">02 / INTERACTION</span>
+              <p className="text-xs font-bold text-[#1D1D1F] mt-2">二级详情跳转</p>
+              <p className="text-xs text-[#86868B] mt-1 leading-relaxed">左右横向动画平移（View panel animation）滑动。</p>
             </div>
-            <div className="border border-m3-outline/10 bg-m3-muted-surface rounded-2xl p-5 hover:border-m3-primary/30 transition-all">
-              <span className="text-[10px] font-mono font-bold text-m3-primary">03 / BACK ROADS</span>
-              <p className="text-xs font-bold text-m3-on-surface mt-2 font-sans">后退按钮替代</p>
-              <p className="text-xs text-m3-outline mt-1 leading-relaxed">顶部面包屑或后退按钮完美继承在原菜单键位置。</p>
+            <div className="border border-[#D2D2D7]/40 bg-[#F5F5F7] rounded-xl p-5 hover:border-[#0071E3]/40 transition-all">
+              <span className="text-[10px] font-mono font-bold text-[#0071E3]">03 / BACK ROADS</span>
+              <p className="text-xs font-bold text-[#1D1D1F] mt-2">后退按钮替代</p>
+              <p className="text-xs text-[#86868B] mt-1 leading-relaxed">顶部面包屑或后退按钮完美继承在原菜单键位置。</p>
             </div>
           </div>
         </div>
@@ -188,24 +188,24 @@ export default function LayoutSimulator() {
 
       {/* MASTER-DETAIL LAYOUT */}
       {layoutType === 'master-detail' && (
-        <div className="bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-[0_4px_16px_rgba(103,80,164,0.03)] space-y-6">
-          <div className="border-b border-m3-outline/10 pb-4">
-            <span className="text-[10px] font-mono font-bold text-m3-primary uppercase tracking-widest block">ROAK MASTER-DETAIL FORM</span>
-            <h4 className="text-sm font-bold text-m3-on-surface mt-1 font-serif">主从分类详细视图 (Master-Detail Layout)</h4>
-            <p className="text-xs text-m3-outline mt-1 leading-relaxed">
+        <div className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm space-y-6 font-sans">
+          <div className="border-b border-[#D2D2D7]/30 pb-4">
+            <span className="text-[10px] font-mono font-bold text-[#0071E3] uppercase tracking-widest block">MASTER-DETAIL FORM</span>
+            <h4 className="text-sm font-bold text-[#1D1D1F] mt-1">主从分类详细视图 (Master-Detail Layout)</h4>
+            <p className="text-xs text-[#86868B] mt-1 leading-relaxed">
               适用于对海量资源（车辆列表、门禁配置、报警事件）进行统一查看、增删改。移动端采用卡片式层级穿梭，平板与桌面端则采用双栏/多栏拼接。
             </p>
           </div>
 
-          <div className="border border-m3-outline/15 rounded-[24px] overflow-hidden grid grid-cols-1 md:grid-cols-12 h-[420px] shadow-sm">
+          <div className="border border-[#D2D2D7]/50 rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-12 h-[420px] shadow-sm">
             {/* Master Column (List) */}
-            <div className="md:col-span-4 bg-m3-muted-surface border-r border-m3-outline/10 flex flex-col justify-between">
-              <div className="p-3 border-b border-m3-outline/10 bg-white">
+            <div className="md:col-span-4 bg-[#F5F5F7] border-r border-[#D2D2D7]/40 flex flex-col justify-between">
+              <div className="p-3 border-b border-[#D2D2D7]/40 bg-white">
                 <input 
                   type="text" 
                   disabled 
                   placeholder="搜索资产设备..." 
-                  className="w-full px-3 py-2 bg-m3-muted-surface border border-m3-outline/10 rounded-xl text-xs text-m3-on-surface placeholder:text-m3-outline/60 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#F5F5F7] border border-[#D2D2D7]/40 rounded-xl text-xs text-[#1D1D1F] placeholder:text-[#86868B]/60 focus:outline-none"
                 />
               </div>
               <div className="flex-1 p-2 overflow-y-auto space-y-1">
@@ -215,18 +215,18 @@ export default function LayoutSimulator() {
                     onClick={() => setSelectedAssetId(item.id)}
                     className={`w-full text-left p-3 rounded-xl text-xs font-semibold flex items-center justify-between border cursor-pointer transition-all ${
                       selectedAssetId === item.id 
-                        ? 'bg-white border-m3-primary/30 text-m3-on-surface shadow-[0_2px_8px_rgba(103,80,164,0.06)]' 
-                        : 'border-transparent text-m3-outline hover:bg-m3-primary/5 hover:text-m3-primary'
+                        ? 'bg-white border-[#0071E3]/20 text-[#1D1D1F] shadow-sm' 
+                        : 'border-transparent text-[#86868B] hover:bg-[#0071E3]/5 hover:text-[#0071E3]'
                     }`}
                   >
                     <span>{item.name}</span>
                     <span className={`w-2.5 h-2.5 rounded-full ${
-                      item.status === 'online' ? 'bg-emerald-500' : item.status === 'warning' ? 'bg-amber-500' : 'bg-red-500'
+                      item.status === 'online' ? 'bg-emerald-500' : item.status === 'warning' ? 'bg-[#FF9500]' : 'bg-[#FF3B30]'
                     }`}></span>
                   </button>
                 ))}
               </div>
-              <div className="p-3.5 border-t border-m3-outline/10 bg-white/50 text-[10px] font-mono font-bold text-m3-outline">
+              <div className="p-3.5 border-t border-[#D2D2D7]/40 bg-white/50 text-[10px] font-mono font-bold text-[#86868B]">
                 TOTAL ITEMS: {assets.length}
               </div>
             </div>
@@ -235,12 +235,12 @@ export default function LayoutSimulator() {
             <div className="md:col-span-8 bg-white p-6 flex flex-col justify-between">
               {selectedAsset ? (
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center border-b border-m3-outline/10 pb-3">
+                  <div className="flex justify-between items-center border-b border-[#D2D2D7]/40 pb-3">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 bg-m3-primary/10 rounded-xl">
+                      <div className="p-2 bg-[#0071E3]/10 rounded-xl">
                         {getAssetIcon(selectedAsset.type, selectedAsset.status)}
                       </div>
-                      <h5 className="font-bold text-m3-on-surface text-sm font-sans">{selectedAsset.name}</h5>
+                      <h5 className="font-bold text-[#1D1D1F] text-sm">{selectedAsset.name}</h5>
                     </div>
                     <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md border ${
                       selectedAsset.status === 'online' 
@@ -254,34 +254,34 @@ export default function LayoutSimulator() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <span className="text-[10px] font-mono font-bold text-m3-outline block uppercase tracking-wider">当前遥测指标 (Live Metrics)</span>
-                    <div className="bg-[#131118] border border-m3-outline/20 p-4 rounded-2xl font-mono text-xs text-m3-outline leading-relaxed">
+                    <span className="text-[10px] font-semibold text-[#86868B] block uppercase tracking-wider">当前遥测指标 (Live Metrics)</span>
+                    <div className="bg-[#1D1D1F] border border-[#D2D2D7]/30 p-4 rounded-xl font-mono text-xs text-[#86868B] leading-relaxed">
                       {selectedAsset.info}
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="p-3.5 bg-m3-muted-surface rounded-2xl border border-m3-outline/10">
-                      <span className="text-[9px] font-mono font-bold text-m3-outline block">MAP LOCATION X</span>
-                      <span className="text-xs font-mono font-bold text-m3-on-surface">{selectedAsset.x} %</span>
+                    <div className="p-3.5 bg-[#F5F5F7] rounded-xl border border-[#D2D2D7]/30">
+                      <span className="text-[9px] font-semibold text-[#86868B] block">MAP LOCATION X</span>
+                      <span className="text-xs font-mono font-bold text-[#1D1D1F]">{selectedAsset.x} %</span>
                     </div>
-                    <div className="p-3.5 bg-m3-muted-surface rounded-2xl border border-m3-outline/10">
-                      <span className="text-[9px] font-mono font-bold text-m3-outline block">MAP LOCATION Y</span>
-                      <span className="text-xs font-mono font-bold text-m3-on-surface">{selectedAsset.y} %</span>
+                    <div className="p-3.5 bg-[#F5F5F7] rounded-xl border border-[#D2D2D7]/30">
+                      <span className="text-[9px] font-semibold text-[#86868B] block">MAP LOCATION Y</span>
+                      <span className="text-xs font-mono font-bold text-[#1D1D1F]">{selectedAsset.y} %</span>
                     </div>
                   </div>
                 </div>
               ) : (
-                <div className="flex items-center justify-center h-full text-m3-outline text-xs italic">
+                <div className="flex items-center justify-center h-full text-[#86868B] text-xs italic">
                   请在左栏选择一项资源查看其详情
                 </div>
               )}
 
-              <div className="flex justify-end gap-2 border-t border-m3-outline/10 pt-4">
-                <button className="px-4 py-2 bg-m3-muted-surface hover:bg-m3-outline/10 text-m3-on-surface border border-m3-outline/10 rounded-xl text-xs font-bold cursor-pointer transition-colors">
+              <div className="flex justify-end gap-2 border-t border-[#D2D2D7]/40 pt-4">
+                <button className="px-4 py-2 bg-[#F5F5F7] hover:bg-[#D2D2D7]/30 text-[#1D1D1F] border border-[#D2D2D7]/40 rounded-xl text-xs font-semibold cursor-pointer transition-colors">
                   标记锁定
                 </button>
-                <button className="px-4 py-2 bg-m3-primary hover:bg-[#533c8c] text-white rounded-xl text-xs font-bold cursor-pointer transition-colors">
+                <button className="px-4 py-2 bg-[#0071E3] hover:bg-[#0071E3]/95 text-white rounded-xl text-xs font-semibold cursor-pointer transition-colors">
                   重置指令通道
                 </button>
               </div>
@@ -295,59 +295,59 @@ export default function LayoutSimulator() {
         <div className="space-y-6">
           
           {/* Map Guidelines Banner */}
-          <div className="bg-[#131118] border border-m3-outline/20 rounded-[28px] p-6 text-zinc-300 space-y-4 shadow-md">
+          <div className="bg-[#1D1D1F] border border-[#D2D2D7]/30 rounded-2xl p-6 text-[#F5F5F7] space-y-4 shadow-sm font-sans">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex items-center gap-2">
-                <Grid className="w-5 h-5 text-m3-primary shrink-0" />
-                <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-m3-outline">
-                  MOBIUS MAP LAYOUT 控制台与行为模拟
+                <Grid className="w-5 h-5 text-[#0071E3] shrink-0" />
+                <h4 className="text-xs font-semibold uppercase tracking-tight text-[#86868B]">
+                  MAP LAYOUT 控制台与行为模拟
                 </h4>
               </div>
 
               {/* UI pattern toggle */}
-              <div className="inline-flex rounded-xl bg-[#1d1a24] p-1 border border-m3-outline/15 shrink-0">
+              <div className="inline-flex rounded-xl bg-zinc-800 p-1 border border-[#D2D2D7]/20 shrink-0 gap-1">
                 <button
                   id="map-ui-docked"
                   onClick={() => setUiPattern('docked')}
-                  className={`px-4.5 py-1.5 text-[11px] font-mono font-bold rounded-lg transition-all cursor-pointer ${
+                  className={`px-4 py-1.5 text-[11px] font-semibold rounded-lg transition-all cursor-pointer ${
                     uiPattern === 'docked' 
-                      ? 'bg-m3-primary text-white shadow-[0_2px_8px_rgba(103,80,164,0.1)]' 
-                      : 'text-m3-outline hover:text-zinc-200'
+                      ? 'bg-[#0071E3] text-white shadow-sm' 
+                      : 'text-[#86868B] hover:text-zinc-200'
                   }`}
                 >
-                  DOCK MAP UI (ROAK 强力推荐)
+                  DOCK MAP UI
                 </button>
                 <button
                   id="map-ui-floating"
                   onClick={() => setUiPattern('floating')}
-                  className={`px-4.5 py-1.5 text-[11px] font-mono font-bold rounded-lg transition-all cursor-pointer ${
+                  className={`px-4 py-1.5 text-[11px] font-semibold rounded-lg transition-all cursor-pointer ${
                     uiPattern === 'floating' 
                       ? 'bg-amber-600 text-white shadow-sm' 
-                      : 'text-m3-outline hover:text-zinc-200'
+                      : 'text-[#86868B] hover:text-zinc-200'
                   }`}
                 >
-                  FLOATING OOUI (ROAK 警示警告)
+                  FLOATING OOUI
                 </button>
               </div>
             </div>
 
-            <p className="text-xs text-m3-outline leading-relaxed font-sans">
-              <strong>核心对比规则：</strong> 浮动对象上 UI（Object-On-Object UI）会遮挡重要的静态地图网格，并且当资产移动或处于拖拽中时，其代表的操作和数值标签会成为一个<strong>极难捕捉的“移动目标”</strong>（如下方动态演练）。因此，所有复杂的卡片、指标与多选操作，一律要求<strong>停靠（Dock）</strong>于侧边固定面板，禁止跟随浮动。
+            <p className="text-xs text-[#86868B] leading-relaxed">
+              <strong>停靠与悬浮对齐法：</strong> 浮动对象上 UI（Object-On-Object UI）会遮挡重要的静态地图网格，并且当资产移动或处于拖拽中时，其代表的操作和数值标签会成为一个<strong>极难捕捉的“移动目标”</strong>（如下方动态演练）。因此，所有复杂的卡片、指标与多选操作，一律要求<strong>停靠（Dock）</strong>于侧边固定面板，禁止随图标浮动移动。
             </p>
           </div>
 
           {/* Interactive Map Visual Simulator */}
-          <div className="border border-m3-outline/20 rounded-[28px] overflow-hidden grid grid-cols-1 lg:grid-cols-12 h-[540px] bg-white shadow-sm">
+          <div className="border border-[#D2D2D7]/50 rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 h-[540px] bg-white shadow-sm">
             
             {/* Docked Side Panel (Left) */}
             {uiPattern === 'docked' && sidebarExpanded && (
-              <div className="lg:col-span-4 bg-m3-muted-surface border-r border-m3-outline/10 p-5 flex flex-col justify-between h-full overflow-y-auto">
+              <div className="lg:col-span-4 bg-[#F5F5F7] border-r border-[#D2D2D7]/40 p-5 flex flex-col justify-between h-full overflow-y-auto font-sans">
                 <div className="space-y-5">
-                  <div className="flex justify-between items-center border-b border-m3-outline/10 pb-2.5">
-                    <span className="text-[10px] font-mono font-bold text-m3-outline">DOCKED ATTRIBUTE PANEL</span>
+                  <div className="flex justify-between items-center border-b border-[#D2D2D7]/40 pb-2.5">
+                    <span className="text-[10px] font-mono font-bold text-[#86868B]">DOCKED ATTRIBUTE PANEL</span>
                     <button
                       onClick={() => setSidebarExpanded(false)}
-                      className="p-1.5 hover:bg-m3-primary/10 rounded-lg text-m3-outline hover:text-m3-primary cursor-pointer transition-colors"
+                      className="p-1.5 hover:bg-[#0071E3]/10 rounded-lg text-[#86868B] hover:text-[#0071E3] cursor-pointer transition-colors"
                       title="折叠面板"
                     >
                       <ChevronLeft className="w-4 h-4" />
@@ -358,18 +358,18 @@ export default function LayoutSimulator() {
                     <div className="space-y-4">
                       {/* Asset Header Info */}
                       <div className="flex items-center gap-3">
-                        <div className="p-2.5 bg-m3-primary/10 rounded-xl">
+                        <div className="p-2.5 bg-[#0071E3]/10 rounded-xl">
                           {getAssetIcon(selectedAsset.type, selectedAsset.status)}
                         </div>
                         <div>
-                          <h5 className="font-bold text-m3-on-surface text-sm font-sans">{selectedAsset.name}</h5>
-                          <p className="text-[10px] font-mono text-m3-outline mt-0.5">Asset ID: {selectedAsset.id.toUpperCase()}</p>
+                          <h5 className="font-bold text-[#1D1D1F] text-sm">{selectedAsset.name}</h5>
+                          <p className="text-[10px] font-mono text-[#86868B] mt-0.5">Asset ID: {selectedAsset.id.toUpperCase()}</p>
                         </div>
                       </div>
 
                       {/* Status indicator badge */}
-                      <div className="flex items-center justify-between bg-white border border-m3-outline/10 p-3 rounded-xl text-xs">
-                        <span className="text-m3-outline font-sans">当前连接可用度</span>
+                      <div className="flex items-center justify-between bg-white border border-[#D2D2D7]/30 p-3 rounded-xl text-xs">
+                        <span className="text-[#86868B]">当前连接可用度</span>
                         <span className={`font-mono font-bold px-2 py-0.5 rounded-md border ${
                           selectedAsset.status === 'online' 
                             ? 'bg-emerald-500/10 text-emerald-700 border-emerald-500/20' 
@@ -383,33 +383,33 @@ export default function LayoutSimulator() {
 
                       {/* Live metrics log */}
                       <div className="space-y-1.5">
-                        <span className="text-[10px] font-mono font-bold text-m3-outline block uppercase">现场遥测实时数据</span>
-                        <div className="bg-[#131118] border border-m3-outline/20 p-3.5 rounded-2xl font-mono text-[11px] text-m3-outline leading-relaxed">
+                        <span className="text-[10px] font-semibold text-[#86868B] block uppercase">现场遥测实时数据</span>
+                        <div className="bg-[#1D1D1F] border border-[#D2D2D7]/30 p-3.5 rounded-xl font-mono text-[11px] text-[#86868B] leading-relaxed">
                           {selectedAsset.info}
-                          <div className="text-[10px] text-m3-primary mt-2 font-bold">
+                          <div className="text-[10px] text-[#0071E3] mt-2 font-bold">
                             • Coordinates: X={selectedAsset.x}%, Y={selectedAsset.y}%
                           </div>
                         </div>
                       </div>
 
                       {/* Instruction Panel */}
-                      <div className="bg-m3-primary/5 border border-m3-primary/15 rounded-2xl p-4 text-[11px] text-m3-outline font-sans leading-relaxed">
+                      <div className="bg-[#0071E3]/5 border border-[#0071E3]/15 rounded-xl p-4 text-[11px] text-[#86868B] leading-relaxed">
                         <strong>停靠面板操作优势：</strong> 固定停靠让操作员的双眼在不偏离主地图全局视差的前提下，在键盘或手持板上获得高枕无忧的操控保障。
                       </div>
                     </div>
                   ) : (
-                    <div className="text-center py-12 text-m3-outline text-xs italic">
+                    <div className="text-center py-12 text-[#86868B] text-xs italic">
                       请在地图上点击选择任意移动车辆或静态资产。
                     </div>
                   )}
                 </div>
 
-                <div className="pt-4 border-t border-m3-outline/10">
-                  <div className="flex gap-2">
-                    <button className="flex-1 py-2 bg-[#1a1820] hover:bg-zinc-800 text-zinc-100 font-bold rounded-xl text-xs font-mono cursor-pointer transition-colors">
+                <div className="pt-4 border-t border-[#D2D2D7]/40">
+                  <div className="flex gap-2 font-mono">
+                    <button className="flex-1 py-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-100 font-bold rounded-xl text-xs cursor-pointer transition-colors">
                       CMD SHUTDOWN
                     </button>
-                    <button className="flex-1 py-2 bg-m3-primary hover:bg-[#533c8c] text-white font-bold rounded-xl text-xs font-mono cursor-pointer transition-colors">
+                    <button className="flex-1 py-2 bg-[#0071E3] hover:bg-[#0071E3]/95 text-white font-bold rounded-xl text-xs cursor-pointer transition-colors">
                       CMD ROUTE REPLAN
                     </button>
                   </div>
@@ -419,16 +419,16 @@ export default function LayoutSimulator() {
 
             {/* Reopen sidebar button if collapsed */}
             {uiPattern === 'docked' && !sidebarExpanded && (
-              <div className="w-12 bg-m3-muted-surface border-r border-m3-outline/10 flex flex-col items-center py-4 justify-between h-full">
+              <div className="w-12 bg-[#F5F5F7] border-r border-[#D2D2D7]/40 flex flex-col items-center py-4 justify-between h-full font-sans">
                 <button
                   onClick={() => setSidebarExpanded(true)}
-                  className="p-1.5 hover:bg-m3-primary/10 rounded-lg text-m3-outline hover:text-m3-primary cursor-pointer transition-colors"
+                  className="p-1.5 hover:bg-[#0071E3]/10 rounded-lg text-[#86868B] hover:text-[#0071E3] cursor-pointer transition-colors"
                   title="展开侧边属性板"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
                 <div className="h-28 flex items-center">
-                  <span className="rotate-90 origin-center whitespace-nowrap text-[10px] font-mono font-bold text-m3-outline">
+                  <span className="rotate-90 origin-center whitespace-nowrap text-[10px] font-mono font-bold text-[#86868B]">
                     DOCKED DATA PANEL
                   </span>
                 </div>
@@ -448,11 +448,11 @@ export default function LayoutSimulator() {
               onMouseLeave={handleMapMouseUp}
             >
               {/* UPPER BAR: Simulated Map Status */}
-              <div className="p-3.5 bg-[#131118]/95 backdrop-blur border-b border-m3-outline/10 text-white flex justify-between items-center z-10 shadow-sm">
+              <div className="p-3.5 bg-[#1D1D1F]/95 backdrop-blur border-b border-[#D2D2D7]/20 text-white flex justify-between items-center z-10 shadow-sm font-sans">
                 <div className="flex items-center gap-3">
                   <span className="text-xs font-mono text-zinc-300 font-bold flex items-center gap-1.5">
-                    <Compass className="w-4 h-4 text-m3-primary animate-spin" style={{ animationDuration: '6s' }} /> 
-                    MOBIUS LIVE SCHEDULER MAP <span className="text-[10px] text-m3-primary font-serif font-medium italic">(2D ONLY)</span>
+                    <Compass className="w-4 h-4 text-[#0071E3] animate-spin" style={{ animationDuration: '6s' }} /> 
+                    ROCK-AI LIVE SCHEDULER MAP <span className="text-[10px] text-[#0071E3] font-sans font-medium italic">(2D ONLY)</span>
                   </span>
                 </div>
 
@@ -462,8 +462,8 @@ export default function LayoutSimulator() {
                     onClick={() => setIsPatrolling(!isPatrolling)}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-mono font-bold transition-all cursor-pointer ${
                       isPatrolling 
-                        ? 'bg-m3-primary text-white shadow-[0_2px_8px_rgba(103,80,164,0.3)]' 
-                        : 'bg-[#1a1820] text-[#a8a29e] hover:text-white border border-m3-outline/20'
+                        ? 'bg-[#0071E3] text-white shadow-sm' 
+                        : 'bg-zinc-800 text-[#a8a29e] hover:text-white border border-[#D2D2D7]/20'
                     }`}
                   >
                     {isPatrolling ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -477,24 +477,24 @@ export default function LayoutSimulator() {
                 ref={mapContainerRef}
                 className="flex-1 w-full relative bg-[#0e0c12]"
                 style={{
-                  backgroundImage: 'radial-gradient(circle, rgba(103,80,164,0.12) 1px, transparent 1px)',
+                  backgroundImage: 'radial-gradient(circle, rgba(0,113,227,0.12) 1px, transparent 1px)',
                   backgroundSize: '24px 24px',
                   transform: `scale(${mapZoom}) rotate(${mapRotation}deg)`,
                   transition: draggingAssetId ? 'none' : 'transform 0.15s ease-out',
                 }}
               >
                 {/* Visual grid reference lines (X/Y) */}
-                <div className="absolute inset-x-0 top-1/2 border-t border-dashed border-m3-outline/10 pointer-events-none"></div>
-                <div className="absolute inset-y-0 left-1/2 border-l border-dashed border-m3-outline/10 pointer-events-none"></div>
+                <div className="absolute inset-x-0 top-1/2 border-t border-dashed border-[#D2D2D7]/10 pointer-events-none"></div>
+                <div className="absolute inset-y-0 left-1/2 border-l border-dashed border-[#D2D2D7]/10 pointer-events-none"></div>
 
                 {/* Assets Markers */}
                 {assets.map((asset) => {
                   const isSelected = selectedAssetId === asset.id;
                   
                   // Status Colors
-                  let borderClass = 'border-m3-primary bg-[#131118]/90 text-m3-primary shadow-[0_2px_12px_rgba(103,80,164,0.2)]';
-                  if (asset.status === 'warning') borderClass = 'border-amber-500 bg-[#131118]/90 text-amber-500 shadow-[0_2px_12px_rgba(245,158,11,0.2)]';
-                  if (asset.status === 'critical') borderClass = 'border-red-500 bg-[#131118]/90 text-red-500 shadow-[0_2px_12px_rgba(239,68,68,0.2)]';
+                  let borderClass = 'border-[#0071E3] bg-[#1D1D1F]/90 text-[#0071E3] shadow-inner';
+                  if (asset.status === 'warning') borderClass = 'border-[#FF9500] bg-[#1D1D1F]/90 text-[#FF9500] shadow-inner';
+                  if (asset.status === 'critical') borderClass = 'border-[#FF3B30] bg-[#1D1D1F]/90 text-[#FF3B30] shadow-inner';
 
                   return (
                     <div
@@ -510,7 +510,7 @@ export default function LayoutSimulator() {
                       {/* Anchor Dot */}
                       <div className={`w-9 h-9 rounded-full border-2 flex items-center justify-center transition-all ${
                         isSelected 
-                          ? 'scale-125 border-white ring-4 ring-m3-primary/40' 
+                          ? 'scale-125 border-white ring-4 ring-[#0071E3]/40' 
                           : 'hover:scale-110'
                       } ${borderClass}`}>
                         {asset.type === 'vehicle' && <Truck className="w-4 h-4" />}
@@ -519,13 +519,13 @@ export default function LayoutSimulator() {
                       </div>
 
                       {/* Micro inline label */}
-                      <div className="absolute top-10 left-1/2 -translate-x-1/2 bg-[#131118]/95 border border-m3-outline/25 text-[9px] font-mono text-[#e4e4e7] px-2 py-0.5 rounded-md whitespace-nowrap shadow-md select-none pointer-events-none">
+                      <div className="absolute top-10 left-1/2 -translate-x-1/2 bg-[#1D1D1F]/95 border border-[#D2D2D7]/35 text-[9px] font-mono text-[#e4e4e7] px-2 py-0.5 rounded-md whitespace-nowrap shadow-sm select-none pointer-events-none">
                         {asset.id.toUpperCase()}
                       </div>
 
                       {/* FLOATING OOUI WARNING MODE REPRESENTATION */}
                       {uiPattern === 'floating' && isSelected && (
-                        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 bg-[#2a1708] text-amber-100 border border-amber-500/50 px-4 py-3 rounded-2xl shadow-[0_12px_32px_rgba(0,0,0,0.5)] w-56 z-30 pointer-events-auto font-sans">
+                        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 bg-[#2a1708] text-amber-100 border border-amber-500/50 px-4 py-3 rounded-xl shadow-[0_12px_32px_rgba(0,0,0,0.5)] w-56 z-30 pointer-events-auto font-sans animate-fade-in">
                           <div className="flex items-center gap-1.5 border-b border-amber-500/20 pb-2 mb-2">
                             <span className="w-2 h-2 bg-amber-500 rounded-full animate-ping"></span>
                             <span className="text-[10px] font-mono font-bold tracking-wider uppercase text-amber-400">FLOATING MOVING TARGET</span>
@@ -543,16 +543,16 @@ export default function LayoutSimulator() {
                 })}
 
                 {/* Simulated Sector Boundaries */}
-                <div className="absolute top-1/4 left-1/3 w-40 h-40 border border-m3-outline/5 rounded-full pointer-events-none"></div>
-                <div className="absolute bottom-1/4 right-1/4 w-52 h-52 border border-dashed border-m3-outline/5 rounded-full pointer-events-none"></div>
+                <div className="absolute top-1/4 left-1/3 w-40 h-40 border border-[#D2D2D7]/5 rounded-full pointer-events-none"></div>
+                <div className="absolute bottom-1/4 right-1/4 w-52 h-52 border border-dashed border-[#D2D2D7]/5 rounded-full pointer-events-none"></div>
               </div>
 
-              {/* LOWER FLOATING MAP CONTROLS (Specified under Map Controls) */}
-              <div className="absolute bottom-4 right-4 bg-[#131118]/95 backdrop-blur border border-m3-outline/25 rounded-2xl p-3 flex items-center gap-2.5 shadow-[0_12px_40px_rgba(0,0,0,0.6)] z-20">
+              {/* LOWER FLOATING MAP CONTROLS */}
+              <div className="absolute bottom-4 right-4 bg-[#1D1D1F]/95 backdrop-blur border border-[#D2D2D7]/35 rounded-xl p-3 flex items-center gap-2.5 shadow-lg z-20 font-sans">
                 {/* Compass / Rotation (Specified) */}
                 <button
                   onClick={() => setMapRotation(0)}
-                  className="p-2 bg-[#1a1820] hover:bg-m3-primary text-zinc-300 hover:text-white rounded-xl transition-all cursor-pointer relative"
+                  className="p-2 bg-zinc-800 hover:bg-[#0071E3] text-zinc-300 hover:text-white rounded-xl transition-all cursor-pointer relative"
                   title="点击重置北方 (Reset to North)"
                 >
                   <Compass 
@@ -563,10 +563,10 @@ export default function LayoutSimulator() {
                   <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-red-500 rounded-full"></span>
                 </button>
 
-                <div className="h-5 w-px bg-m3-outline/15"></div>
+                <div className="h-5 w-px bg-zinc-800"></div>
 
                 {/* Slider for rotation */}
-                <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-mono text-[#a8a29e]">
+                <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-mono text-[#86868B]">
                   <span>旋转</span>
                   <input 
                     type="range" 
@@ -574,24 +574,24 @@ export default function LayoutSimulator() {
                     max="360" 
                     value={mapRotation}
                     onChange={(e) => setMapRotation(Number(e.target.value))}
-                    className="w-16 accent-m3-primary h-1 bg-[#1a1820] rounded-lg appearance-none cursor-pointer"
+                    className="w-16 accent-[#0071E3] h-1 bg-zinc-800 rounded-lg appearance-none cursor-pointer"
                   />
-                  <span className="w-8 text-right text-m3-outline">{mapRotation}°</span>
+                  <span className="w-8 text-right text-[#86868B]">{mapRotation}°</span>
                 </div>
 
-                <div className="hidden sm:block h-5 w-px bg-m3-outline/15"></div>
+                <div className="hidden sm:block h-5 w-px bg-zinc-800"></div>
 
                 {/* Zoom Controls (Specified: +/- Buttons) */}
                 <button
                   onClick={() => setMapZoom(prev => Math.min(1.8, prev + 0.1))}
-                  className="p-1.5 bg-[#1a1820] hover:bg-[#25222d] text-[#e4e4e7] rounded-lg cursor-pointer"
+                  className="p-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 rounded-lg cursor-pointer"
                   title="放大 (Zoom In)"
                 >
                   <ZoomIn className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setMapZoom(prev => Math.max(0.6, prev - 0.1))}
-                  className="p-1.5 bg-[#1a1820] hover:bg-[#25222d] text-[#e4e4e7] rounded-lg cursor-pointer"
+                  className="p-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 rounded-lg cursor-pointer"
                   title="缩小 (Zoom Out)"
                 >
                   <ZoomOut className="w-4 h-4" />
@@ -600,7 +600,7 @@ export default function LayoutSimulator() {
                 {/* Show All (Specified) */}
                 <button
                   onClick={handleShowAll}
-                  className="p-1.5 bg-[#1a1820] hover:bg-[#25222d] text-[#e4e4e7] rounded-lg cursor-pointer"
+                  className="p-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 rounded-lg cursor-pointer"
                   title="全显重置 (Show All / Fit Map)"
                 >
                   <Maximize className="w-4 h-4" />
@@ -608,9 +608,9 @@ export default function LayoutSimulator() {
               </div>
 
               {/* Dynamic bottom telemetry footer */}
-              <div className="p-3 bg-[#0a090d] border-t border-m3-outline/20 text-[10px] font-mono text-m3-outline flex justify-between items-center">
+              <div className="p-3 bg-[#0a090d] border-t border-zinc-800 text-[10px] font-mono text-[#86868B] flex justify-between items-center">
                 <span>SIMULATION FPS: 60 | RENDER: CANVAS_2D</span>
-                <span className="font-bold text-m3-primary">DRAG ANY VEHICLE MARKER ON MAP GRID</span>
+                <span className="font-semibold text-[#0071E3]">DRAG ANY VEHICLE MARKER ON MAP GRID</span>
               </div>
             </div>
 

@@ -6,8 +6,8 @@ import {
 
 export default function AccessibilitySection() {
   // WCAG Color Contrast Calculator States
-  const [fgColor, setFgColor] = useState('#6750A4'); // M3 Primary
-  const [bgColor, setBgColor] = useState('#F4F1FB'); // M3 Muted Surface
+  const [fgColor, setFgColor] = useState('#0071E3'); // Apple Blue
+  const [bgColor, setBgColor] = useState('#F5F5F7'); // Apple Light Gray
   const [contrastRatio, setContrastRatio] = useState<number>(4.5);
   
   // Keyboard Simulation focus index
@@ -63,14 +63,14 @@ export default function AccessibilitySection() {
     <div className="space-y-8 animate-fade-in" id="accessibility-section">
       
       {/* Intro section banner */}
-      <div className="bg-[#131118] border border-m3-outline/20 rounded-[28px] p-6 text-zinc-300 space-y-3 shadow-md">
+      <div className="bg-[#1D1D1F] border border-[#D2D2D7]/30 rounded-2xl p-6 text-[#F5F5F7] space-y-3 shadow-sm">
         <div className="flex items-center gap-2">
-          <Accessibility className="w-5 h-5 text-m3-primary shrink-0" />
-          <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-m3-outline">
-            MOBIUS 5.0 无障碍、包容性与极端视感标准 (Accessibility)
+          <Accessibility className="w-5 h-5 text-[#0071E3] shrink-0" />
+          <h4 className="text-xs font-semibold uppercase tracking-tight text-[#86868B] font-sans">
+            ROCK-AI & APPLE HIG 无障碍、包容性与极端视感标准 (Accessibility)
           </h4>
         </div>
-        <p className="text-xs text-m3-outline leading-relaxed">
+        <p className="text-xs text-[#86868B] leading-relaxed font-sans">
           在高光眩光、严重沙尘或夜间红外夜视条件下，设计良好的无障碍属性不仅仅是社会责任，更是避免由于视疲劳而酿成灾难性人身意外的直接技术安全屏障。
         </p>
       </div>
@@ -78,53 +78,53 @@ export default function AccessibilitySection() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
         {/* INTERACTIVE CONTRAST CALCULATOR */}
-        <div className="bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-sm space-y-6 flex flex-col justify-between">
+        <div className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm space-y-6 flex flex-col justify-between">
           <div className="space-y-3">
-            <div className="flex items-center gap-2 border-b border-m3-outline/10 pb-3">
-              <span className="text-[10px] font-mono font-bold text-m3-primary bg-m3-secondary-container px-2.5 py-0.5 rounded-full">TOOL 01</span>
-              <h4 className="text-sm font-bold text-m3-on-surface">WCAG 2.1 物理对比度计算器</h4>
+            <div className="flex items-center gap-2 border-b border-[#D2D2D7]/30 pb-3 font-sans">
+              <span className="text-[10px] font-bold text-[#0071E3] bg-[#0071E3]/10 px-2.5 py-0.5 rounded-full">TOOL 01</span>
+              <h4 className="text-sm font-bold text-[#1D1D1F]">WCAG 2.1 物理对比度计算器</h4>
             </div>
-            <p className="text-xs text-m3-outline leading-relaxed">
+            <p className="text-xs text-[#86868B] leading-relaxed font-sans">
               输入或选择前景色 (文字) 和背景色，系统使用相对亮度 (Relative Luminance) 实时计算对比系数，判别 WCAG 标准。
             </p>
           </div>
 
           {/* Color pickers */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-m3-muted-surface/30 p-4 rounded-2xl border border-m3-outline/10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#F5F5F7] p-4 rounded-xl border border-[#D2D2D7]/30 font-sans">
             <div className="space-y-2">
-              <label className="text-[10px] font-mono font-bold text-m3-on-surface block uppercase">前景色 / 文字 (Foreground)</label>
+              <label className="text-[10px] font-semibold text-[#1D1D1F] block uppercase tracking-tight">前景色 / 文字 (Foreground)</label>
               <div className="flex gap-2">
                 <input 
                   type="color" 
                   value={fgColor} 
                   onChange={(e) => setFgColor(e.target.value)}
-                  className="w-8 h-8 rounded border-0 cursor-pointer p-0"
+                  className="w-8 h-8 rounded-lg border border-zinc-300 cursor-pointer p-0"
                 />
                 <input
                   type="text"
                   maxLength={7}
                   value={fgColor}
                   onChange={(e) => setFgColor(e.target.value)}
-                  className="w-full text-xs font-mono px-3 py-1.5 border border-m3-outline/25 rounded-lg focus:ring-1 focus:ring-m3-primary bg-white uppercase"
+                  className="w-full text-xs font-mono px-3 py-1.5 border border-[#D2D2D7]/40 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#0071E3] bg-white uppercase"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-[10px] font-mono font-bold text-m3-on-surface block uppercase">背景色 (Background)</label>
+              <label className="text-[10px] font-semibold text-[#1D1D1F] block uppercase tracking-tight">背景色 (Background)</label>
               <div className="flex gap-2">
                 <input 
                   type="color" 
                   value={bgColor} 
                   onChange={(e) => setBgColor(e.target.value)}
-                  className="w-8 h-8 rounded border-0 cursor-pointer p-0"
+                  className="w-8 h-8 rounded-lg border border-zinc-300 cursor-pointer p-0"
                 />
                 <input
                   type="text"
                   maxLength={7}
                   value={bgColor}
                   onChange={(e) => setBgColor(e.target.value)}
-                  className="w-full text-xs font-mono px-3 py-1.5 border border-m3-outline/25 rounded-lg focus:ring-1 focus:ring-m3-primary bg-white uppercase"
+                  className="w-full text-xs font-mono px-3 py-1.5 border border-[#D2D2D7]/40 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#0071E3] bg-white uppercase"
                 />
               </div>
             </div>
@@ -132,15 +132,15 @@ export default function AccessibilitySection() {
 
           {/* Dynamic Render Sandbox */}
           <div 
-            className="rounded-2xl p-6 h-36 flex flex-col justify-between items-center relative overflow-hidden transition-all duration-150 border border-m3-outline/10 shadow-inner"
+            className="rounded-xl p-6 h-36 flex flex-col justify-between items-center relative overflow-hidden transition-all duration-150 border border-[#D2D2D7]/40 shadow-inner"
             style={{ backgroundColor: bgColor }}
           >
             <span className="text-[9px] font-mono opacity-40 absolute top-2 right-4">LIVE RENDER PREVIEW</span>
             <div className="text-center my-auto space-y-1">
               <p className="text-base font-extrabold font-mono" style={{ color: fgColor }}>
-                MOBIUS_ALRT (14pt 常规文字)
+                ROCK-AI_ALRT (14pt 常规文字)
               </p>
-              <p className="text-2xl font-extrabold font-serif italic" style={{ color: fgColor }}>
+              <p className="text-2xl font-bold font-sans tracking-tight" style={{ color: fgColor }}>
                 2D RADAR TRACK (24pt 大字号)
               </p>
             </div>
@@ -150,12 +150,12 @@ export default function AccessibilitySection() {
           </div>
 
           {/* Compliance Checklist and Contrast Score */}
-          <div className="flex flex-col sm:flex-row items-stretch justify-between gap-4 border-t border-m3-outline/10 pt-4">
+          <div className="flex flex-col sm:flex-row items-stretch justify-between gap-4 border-t border-[#D2D2D7]/30 pt-4 font-sans">
             {/* Big Score Box */}
-            <div className="bg-[#131118] text-white py-4 px-6 rounded-[20px] text-center shrink-0 border border-zinc-800 flex flex-col justify-center min-w-[120px]">
-              <span className="text-[9px] font-mono text-zinc-500 block leading-none font-bold uppercase">Contrast Ratio</span>
-              <span className="text-3xl font-extrabold block mt-2 font-mono text-m3-primary">{contrastRatio}:1</span>
-              <span className="text-[9px] text-zinc-400 mt-1 font-mono">
+            <div className="bg-[#1D1D1F] text-white py-4 px-6 rounded-2xl text-center shrink-0 border border-[#D2D2D7]/30 flex flex-col justify-center min-w-[120px]">
+              <span className="text-[9px] font-semibold text-[#86868B] block leading-none uppercase tracking-tight">Contrast Ratio</span>
+              <span className="text-3xl font-bold block mt-2 font-mono text-[#0071E3]">{contrastRatio}:1</span>
+              <span className="text-[9px] text-[#86868B] mt-1 font-semibold">
                 {contrastRatio >= 4.5 ? '✅ AA 符合' : '⚠️ 低于最低标准'}
               </span>
             </div>
@@ -198,19 +198,19 @@ export default function AccessibilitySection() {
         </div>
 
         {/* KEYBOARD NAVIGATION INTERACTIVE PANEL */}
-        <div className="bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-sm space-y-6 flex flex-col justify-between">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 border-b border-m3-outline/10 pb-3">
-              <span className="text-[10px] font-mono font-bold text-m3-primary bg-m3-secondary-container px-2.5 py-0.5 rounded-full">PLAYGROUND 02</span>
-              <h4 className="text-sm font-bold text-m3-on-surface">无障碍键盘导航与焦点环环线</h4>
+        <div className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm space-y-6 flex flex-col justify-between">
+          <div className="space-y-3 font-sans">
+            <div className="flex items-center gap-2 border-b border-[#D2D2D7]/30 pb-3">
+              <span className="text-[10px] font-bold text-[#0071E3] bg-[#0071E3]/10 px-2.5 py-0.5 rounded-full">PLAYGROUND 02</span>
+              <h4 className="text-sm font-bold text-[#1D1D1F]">无障碍键盘导航与焦点环环线</h4>
             </div>
-            <p className="text-xs text-m3-outline leading-relaxed">
-              在重度高负荷现场，鼠标损坏时调度员必须依靠键盘 TAB 键极速寻焦。M3 标准规定，焦圈环必须使用双层高反差边框。点击模拟键位，观察焦点环的轮廓响应：
+            <p className="text-xs text-[#86868B] leading-relaxed">
+              在重度高负荷现场，鼠标损坏时调度员必须依靠键盘 TAB 键极速寻焦。Apple HIG 与 Rock-ai 规定，焦圈环必须使用双层高反差边框。点击模拟键位，观察焦点环的轮廓响应：
             </p>
           </div>
 
           {/* Interactive buttons simulating keyboard tab */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-m3-muted-surface/40 p-4 rounded-2xl border border-m3-outline/10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-[#F5F5F7] p-4 rounded-xl border border-[#D2D2D7]/30">
             {[
               { id: 0, label: '按钮 A: 航道核对 (Route Check)', desc: '普通功能键' },
               { id: 1, label: '按钮 B: 二维标定 (Radar Cal)', desc: '标定核心功能' },
@@ -221,20 +221,20 @@ export default function AccessibilitySection() {
                 onClick={() => setFocusedIndex(btn.id)}
                 className={`p-4 text-left rounded-xl border bg-white transition-all cursor-pointer relative ${
                   focusedIndex === btn.id 
-                    ? 'ring-2 ring-m3-primary ring-offset-2 border-m3-primary shadow-md' 
-                    : 'border-m3-outline/15 text-m3-on-surface/80 hover:bg-m3-light-purple/20'
+                    ? 'ring-2 ring-[#0071E3] ring-offset-2 border-[#0071E3] shadow-sm' 
+                    : 'border-[#D2D2D7]/40 text-[#1D1D1F]/80 hover:bg-[#0071E3]/5'
                 }`}
               >
                 {/* Visual focus indicator details */}
                 {focusedIndex === btn.id && (
-                  <span className="absolute -inset-1.5 border-1 border-dashed border-m3-primary/60 rounded-[14px] pointer-events-none" />
+                  <span className="absolute -inset-1.5 border-1 border-dashed border-[#0071E3]/60 rounded-2xl pointer-events-none" />
                 )}
                 
-                <span className="text-[11px] font-extrabold block">{btn.label}</span>
-                <span className="text-[9px] text-m3-outline block mt-1 leading-normal">{btn.desc}</span>
+                <span className="text-[11px] font-extrabold block font-sans">{btn.label}</span>
+                <span className="text-[9px] text-[#86868B] block mt-1 leading-normal font-sans">{btn.desc}</span>
                 
                 {focusedIndex === btn.id && (
-                  <span className="text-[8px] font-mono font-bold text-m3-primary block mt-2 animate-pulse">
+                  <span className="text-[8px] font-mono font-bold text-[#0071E3] block mt-2 animate-pulse">
                     FOCUS ACTIVE (Tab Order: {btn.id + 1})
                   </span>
                 )}
@@ -242,28 +242,28 @@ export default function AccessibilitySection() {
             ))}
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 font-sans">
             <button
               onClick={() => {
                 const next = focusedIndex === null ? 0 : (focusedIndex + 1) % 3;
                 setFocusedIndex(next);
               }}
-              className="flex-1 py-2 px-3 text-center bg-m3-primary text-white font-mono font-bold text-xs rounded-xl cursor-pointer hover:bg-[#533c8c]"
+              className="flex-1 py-2 px-3 text-center bg-[#0071E3] text-white font-semibold text-xs rounded-xl cursor-pointer hover:bg-[#0071E3]/90 transition-all"
             >
               模拟按下 [TAB] 键切换焦点
             </button>
             <button
               onClick={() => setFocusedIndex(null)}
-              className="py-2 px-4 border border-m3-outline/15 font-mono text-xs font-bold rounded-xl text-m3-outline hover:bg-m3-muted-surface cursor-pointer"
+              className="py-2 px-4 border border-[#D2D2D7]/50 text-xs font-semibold rounded-xl text-[#86868B] hover:bg-[#F5F5F7] cursor-pointer transition-all"
             >
               清除焦点 (Reset)
             </button>
           </div>
 
-          <div className="bg-m3-muted-surface/40 p-4 rounded-xl border border-m3-outline/10 text-[11px] text-m3-outline leading-relaxed flex items-start gap-2.5">
-            <Keyboard className="w-5 h-5 text-m3-primary shrink-0 mt-0.5" />
+          <div className="bg-[#F5F5F7] p-4 rounded-xl border border-[#D2D2D7]/30 text-[11px] text-[#86868B] leading-relaxed flex items-start gap-2.5 font-sans">
+            <Keyboard className="w-5 h-5 text-[#0071E3] shrink-0 mt-0.5" />
             <div>
-              <span className="font-bold text-m3-on-surface block mb-1">MOBIUS 无障碍焦点双重轨线：</span>
+              <span className="font-bold text-[#1D1D1F] block mb-1">ROCK-AI 无障碍焦点双重轨线：</span>
               在聚焦状态下，系统除了提供高饱和度的主色描边外，还会在其外侧加上 2dp 的虚线引导带，确保即使对红绿色盲患者也能一眼区分哪个组件正处于活跃编辑状态。
             </div>
           </div>
@@ -272,10 +272,10 @@ export default function AccessibilitySection() {
       </div>
 
       {/* ARIA SCREEN READER SOUND/NARRATOR EXPLORER */}
-      <div className="bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-sm space-y-6">
-        <div className="border-b border-m3-outline/10 pb-3 space-y-1.5">
-          <h4 className="text-sm font-bold text-m3-on-surface">ARIA 属性与屏幕阅读器旁白映射 (Screen Reader Simulator)</h4>
-          <p className="text-xs text-m3-outline">
+      <div className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm space-y-6">
+        <div className="border-b border-[#D2D2D7]/30 pb-3 space-y-1.5 font-sans">
+          <h4 className="text-sm font-bold text-[#1D1D1F]">ARIA 属性与屏幕阅读器旁白映射 (Screen Reader Simulator)</h4>
+          <p className="text-xs text-[#86868B]">
             对于具有视力障碍的辅助驾驶人员，高完整度的 `aria-label` 与 `role` 是他们感知软件维度的唯一途径。在下方选择组件查看拟真的视听旁白映射：
           </p>
         </div>
@@ -321,29 +321,29 @@ export default function AccessibilitySection() {
               onClick={() => setSelectedScreenReaderEl(item.id)}
               className={`border rounded-2xl p-5 space-y-4 cursor-pointer transition-all ${
                 selectedScreenReaderEl === item.id 
-                  ? 'border-m3-primary bg-m3-primary/5 shadow-sm' 
-                  : 'border-m3-outline/15 bg-white hover:bg-m3-muted-surface/30'
+                  ? 'border-[#0071E3] bg-[#0071E3]/5 shadow-sm' 
+                  : 'border-[#D2D2D7]/50 bg-white hover:bg-[#F5F5F7]'
               }`}
             >
-              <h5 className="text-xs font-bold text-m3-on-surface">{item.label}</h5>
+              <h5 className="text-xs font-bold text-[#1D1D1F] font-sans">{item.label}</h5>
               
-              <div className="space-y-2 bg-[#131118] text-zinc-300 rounded-xl p-4 font-mono text-[11px] border border-zinc-800">
-                <div className="flex justify-between border-b border-zinc-800 pb-1.5 text-[9px] text-zinc-500">
+              <div className="space-y-2 bg-[#1D1D1F] text-[#86868B] rounded-xl p-4 font-mono text-[11px] border border-[#D2D2D7]/30">
+                <div className="flex justify-between border-b border-[#D2D2D7]/20 pb-1.5 text-[9px] text-[#86868B] font-sans font-semibold">
                   <span>SCREEN READER NARRATIVE</span>
-                  <Volume2 className="w-3.5 h-3.5 text-m3-primary" />
+                  <Volume2 className="w-3.5 h-3.5 text-[#0071E3]" />
                 </div>
                 <div className="text-white font-sans text-xs italic leading-relaxed py-1.5">
                   “ {item.aria.label} ”
                 </div>
-                <div className="pt-1.5 border-t border-zinc-800 flex justify-between text-[9px] text-zinc-400">
-                  <span>ROLE: <strong className="text-m3-primary">{item.aria.role}</strong></span>
+                <div className="pt-1.5 border-t border-[#D2D2D7]/20 flex justify-between text-[9px] text-[#86868B] font-sans">
+                  <span>ROLE: <strong className="text-[#0071E3] font-semibold">{item.aria.role}</strong></span>
                   <span>LIVE: {item.aria.live}</span>
                 </div>
               </div>
 
-              <div className="space-y-1.5">
-                <span className="text-[9px] font-mono text-m3-outline font-bold uppercase block">HTML 无障碍语义标记 (ARIA HTML)</span>
-                <pre className="text-[9px] font-mono text-m3-primary bg-m3-secondary-container/30 px-2 py-1.5 rounded border border-m3-primary/10 overflow-x-auto whitespace-pre">
+              <div className="space-y-1.5 font-sans">
+                <span className="text-[9px] font-semibold text-[#86868B] uppercase block">HTML 无障碍语义标记 (ARIA HTML)</span>
+                <pre className="text-[9px] font-mono text-[#0071E3] bg-[#0071E3]/5 px-2 py-1.5 rounded border border-[#0071E3]/10 overflow-x-auto whitespace-pre">
                   {item.code}
                 </pre>
               </div>

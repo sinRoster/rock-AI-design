@@ -68,7 +68,7 @@ export default function ContentGuidelinesSection() {
       code: 'STATE_OVERLAY',
       chinese: '状态图层叠加',
       english: 'State Layer Overlay',
-      definition: 'Material 3 体系下用于指示交互状态（悬停、按下、拖拽等）的不透明品牌纯色蒙版。',
+      definition: 'Apple HIG 体系下用于指示交互状态（悬停、按下、拖拽等）的不透明品牌纯色蒙版。',
       rationale: '使用透明度来在底层颜色上累加明度，这样即使在非标准屏幕上也能保持统一的色彩感知。',
       category: 'ui'
     },
@@ -152,45 +152,45 @@ export default function ContentGuidelinesSection() {
     <div className="space-y-8 animate-fade-in" id="content-guidelines-section">
       
       {/* Intro block */}
-      <div className="bg-[#131118] border border-m3-outline/20 rounded-[28px] p-6 text-zinc-300 space-y-3 shadow-md">
+      <div className="bg-[#1D1D1F] border border-[#D2D2D7]/30 rounded-2xl p-6 text-[#F5F5F7] space-y-3 shadow-sm font-sans">
         <div className="flex items-center gap-2">
-          <BookOpen className="w-5 h-5 text-m3-primary shrink-0" />
-          <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-m3-outline">
-            MOBIUS 5.0 内容指南与工业文案范式 (Content Guidelines)
+          <BookOpen className="w-5 h-5 text-[#0071E3] shrink-0" />
+          <h4 className="text-xs font-semibold uppercase tracking-tight text-[#86868B]">
+            ROCK-AI 内容指南与工业文案范式 (Content Guidelines)
           </h4>
         </div>
-        <p className="text-xs text-m3-outline leading-relaxed">
+        <p className="text-xs text-[#86868B] leading-relaxed">
           在无人驾驶矿区、智慧码头等高危工业调度控制台，一字之差可能导致严重的物理碰撞。文案写作必须摒弃消费级产品的委婉与感性，执行极致的数据精准度与命令式语调。
         </p>
       </div>
 
       {/* CORE HIGHLIGHT A: Voice and Tone Comparison */}
-      <div className="bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-sm space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-m3-outline/10 pb-4">
+      <div className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#D2D2D7]/30 pb-4 font-sans">
           <div>
-            <h4 className="text-sm font-bold text-m3-on-surface">文案语气多态比对 (Consumer vs. Industrial Voice)</h4>
-            <p className="text-xs text-m3-outline mt-1">
+            <h4 className="text-sm font-bold text-[#1D1D1F]">文案语气多态比对 (Consumer vs. Industrial Voice)</h4>
+            <p className="text-xs text-[#86868B] mt-1">
               切换语气观察同一个事件在消费级应用与高危调度终端上的文案差异：
             </p>
           </div>
 
-          <div className="flex bg-m3-muted-surface p-1 rounded-xl shrink-0 border border-m3-outline/10">
+          <div className="flex bg-[#F5F5F7] p-1 rounded-xl shrink-0 border border-[#D2D2D7]/30 gap-1">
             <button
               onClick={() => setToneMode('consumer')}
-              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 toneMode === 'consumer' 
-                  ? 'bg-white text-m3-primary shadow-sm' 
-                  : 'text-m3-outline hover:text-m3-on-surface'
+                  ? 'bg-white text-[#1D1D1F] shadow-sm' 
+                  : 'text-[#86868B] hover:text-[#1D1D1F]'
               }`}
             >
               消费端语调 (Consumer Context)
             </button>
             <button
               onClick={() => setToneMode('industrial')}
-              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 toneMode === 'industrial' 
-                  ? 'bg-m3-primary text-white shadow-sm' 
-                  : 'text-m3-outline hover:text-m3-on-surface'
+                  ? 'bg-[#0071E3] text-white shadow-sm' 
+                  : 'text-[#86868B] hover:text-[#1D1D1F]'
               }`}
             >
               工业合规语调 (Industrial Standard)
@@ -199,18 +199,18 @@ export default function ContentGuidelinesSection() {
         </div>
 
         {/* Tone Showroom Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-sans">
           {[
             {
               scenario: '场景 A：无线局域网连接超时',
               consumer: {
                 title: '网络有点不给力',
                 desc: '系统正在尝试重新连接，请您稍等片刻，或者检查路由器状态。',
-                style: 'border-m3-outline/15 text-m3-outline',
+                style: 'border-[#D2D2D7]/50 text-[#86868B]',
                 tag: 'Soft Assistance'
               },
               industrial: {
-                title: 'ERR_NET_TIMEOUT [MOBIUS_WIFI_04]',
+                title: 'ERR_NET_TIMEOUT [ROCK-AI_WIFI_04]',
                 desc: '调度终端AP丢包率超限 [94%]。自动重试 3/5 次。车辆自动停等锁死，请立即派驻地面检测员核查 AP 基站信号。',
                 style: 'border-red-500/30 bg-red-50/20 text-red-900',
                 tag: 'IMPERATIVE WARNING'
@@ -221,7 +221,7 @@ export default function ContentGuidelinesSection() {
               consumer: {
                 title: '电量不足，请充电',
                 desc: '您的电量仅剩 15%，为了不影响正常使用，请及时连接电源线。',
-                style: 'border-m3-outline/15 text-m3-outline',
+                style: 'border-[#D2D2D7]/50 text-[#86868B]',
                 tag: 'Gentle Suggestion'
               },
               industrial: {
@@ -236,7 +236,7 @@ export default function ContentGuidelinesSection() {
               consumer: {
                 title: '更改成功啦！',
                 desc: '我们已经将您的配置记录下来了，祝您今天使用愉快！',
-                style: 'border-m3-outline/15 text-m3-outline',
+                style: 'border-[#D2D2D7]/50 text-[#86868B]',
                 tag: 'Celebratory Friendly'
               },
               industrial: {
@@ -254,26 +254,26 @@ export default function ContentGuidelinesSection() {
                 className={`border rounded-2xl p-5 space-y-4 transition-all duration-300 flex flex-col justify-between ${currentObj.style}`}
               >
                 <div className="space-y-2">
-                  <span className="text-[10px] font-mono text-m3-outline font-bold uppercase tracking-wider block">{card.scenario}</span>
+                  <span className="text-[10px] font-semibold text-[#86868B] uppercase tracking-wider block">{card.scenario}</span>
                   <div className="flex items-center gap-1.5">
-                    <span className={`text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded ${
+                    <span className={`text-[9px] font-bold uppercase px-2 py-0.5 rounded ${
                       toneMode === 'industrial' ? 'bg-red-100 text-red-700 border border-red-200' : 'bg-gray-100 text-gray-600'
                     }`}>
                       {currentObj.tag}
                     </span>
                   </div>
-                  <h5 className="text-xs font-extrabold font-mono uppercase tracking-tight mt-1">
+                  <h5 className="text-xs font-bold font-mono uppercase tracking-tight mt-1">
                     {currentObj.title}
                   </h5>
-                  <p className="text-xs leading-relaxed opacity-90 font-sans">
+                  <p className="text-xs leading-relaxed opacity-90">
                     {currentObj.desc}
                   </p>
                 </div>
 
-                <div className="text-[10px] font-mono opacity-60 border-t border-m3-outline/10 pt-2.5">
+                <div className="text-[10px] font-mono opacity-60 border-t border-[#D2D2D7]/30 pt-2.5">
                   文案合规度：
                   <span className="font-bold ml-1">
-                    {toneMode === 'industrial' ? '✅ 符合 MOBIUS V8.0' : '❌ 极度不建议用于控制台'}
+                    {toneMode === 'industrial' ? '✅ 符合 ROCK-AI V8.0' : '❌ 极度不建议用于控制台'}
                   </span>
                 </div>
               </div>
@@ -286,23 +286,23 @@ export default function ContentGuidelinesSection() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
         {/* Warning Copy Evaluator */}
-        <div className="bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-sm space-y-5 flex flex-col justify-between">
+        <div className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm space-y-5 flex flex-col justify-between font-sans">
           <div className="space-y-3">
-            <div className="flex items-center gap-2 border-b border-m3-outline/10 pb-3">
-              <span className="text-[10px] font-mono font-bold text-m3-primary bg-m3-secondary-container px-2.5 py-0.5 rounded-full">INTERACTIVE TEST</span>
-              <h4 className="text-sm font-bold text-m3-on-surface">安全告警文案合规评审器</h4>
+            <div className="flex items-center gap-2 border-b border-[#D2D2D7]/30 pb-3">
+              <span className="text-[10px] font-bold text-[#0071E3] bg-[#0071E3]/10 px-2.5 py-0.5 rounded-full">INTERACTIVE TEST</span>
+              <h4 className="text-sm font-bold text-[#1D1D1F]">安全告警文案合规评审器</h4>
             </div>
-            <p className="text-xs text-m3-outline leading-relaxed">
+            <p className="text-xs text-[#86868B] leading-relaxed">
               输入你为工业平板、调度员看板编写的警报文案，我们的文案规则引擎将实时检测、分析和评分，输出修改建议。
             </p>
           </div>
 
           <div className="space-y-2.5">
-            <label className="text-[10px] font-mono font-bold text-m3-outline block uppercase">输入您的告警文案进行评估</label>
+            <label className="text-[10px] font-semibold text-[#86868B] block uppercase tracking-tight">输入您的告警文案进行评估</label>
             <textarea
               value={userWarningText}
               onChange={(e) => handleEvaluateCopy(e.target.value)}
-              className="w-full h-24 p-3.5 text-xs border border-m3-outline/25 rounded-xl font-mono focus:ring-1 focus:ring-m3-primary focus:border-m3-primary bg-m3-muted-surface/30 text-m3-on-surface"
+              className="w-full h-24 p-3.5 text-xs border border-[#D2D2D7]/40 rounded-xl font-mono focus:outline-none focus:ring-1 focus:ring-[#0071E3] bg-[#F5F5F7] text-[#1D1D1F]"
               placeholder="例如: 警告：卡车TRK_12电机超温 [105°C]，请立即手动停机！"
             />
           </div>
@@ -315,7 +315,7 @@ export default function ContentGuidelinesSection() {
               <button
                 key={idx}
                 onClick={() => handleEvaluateCopy(preset.text)}
-                className="text-[10px] font-semibold bg-m3-muted-surface hover:bg-m3-light-purple/40 border border-m3-outline/10 py-1.5 px-3 rounded-lg text-m3-on-surface transition-colors cursor-pointer"
+                className="text-[10px] font-semibold bg-[#F5F5F7] hover:bg-[#0071E3]/10 border border-[#D2D2D7]/40 py-1.5 px-3 rounded-lg text-[#1D1D1F] transition-colors cursor-pointer"
               >
                 {preset.label}
               </button>
@@ -323,8 +323,8 @@ export default function ContentGuidelinesSection() {
           </div>
 
           {/* Assessment results */}
-          <div className="bg-[#131118] text-zinc-300 rounded-2xl p-5 space-y-4 border border-m3-outline/20">
-            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+          <div className="bg-[#1D1D1F] text-[#F5F5F7] rounded-xl p-5 space-y-4 border border-[#D2D2D7]/30">
+            <div className="flex items-center justify-between border-b border-[#D2D2D7]/20 pb-3">
               <div className="flex items-center gap-2.5">
                 <span className={`w-8 h-8 rounded-full font-bold flex items-center justify-center text-xs ${
                   evaluationResult.level === 'A' 
@@ -336,21 +336,21 @@ export default function ContentGuidelinesSection() {
                   {evaluationResult.level}
                 </span>
                 <div>
-                  <span className="text-[10px] text-zinc-500 font-mono block">COMPLIANCE SCORE</span>
+                  <span className="text-[10px] text-[#86868B] font-semibold block">COMPLIANCE SCORE</span>
                   <span className="text-sm font-bold text-white font-mono">{evaluationResult.score} / 100</span>
                 </div>
               </div>
-              <span className="text-[9px] font-mono text-zinc-500">MOBIUS RULE RE-CHECK</span>
+              <span className="text-[9px] font-mono text-[#86868B]">ROCK-AI RULE RE-CHECK</span>
             </div>
 
             <div className="text-xs space-y-1 leading-relaxed">
-              <span className="text-m3-outline font-bold">评级结论：</span>
+              <span className="text-[#86868B] font-bold">评级结论：</span>
               <p className="text-white opacity-95">{evaluationResult.verdict}</p>
             </div>
 
             {evaluationResult.suggestions.length > 0 && (
               <div className="space-y-2">
-                <span className="text-[10px] font-mono text-m3-primary font-bold uppercase tracking-wider block">⚠️ 仍需改进的条款</span>
+                <span className="text-[10px] font-semibold text-[#0071E3] uppercase tracking-wider block">⚠️ 仍需改进的条款</span>
                 <ul className="space-y-1">
                   {evaluationResult.suggestions.map((sug, i) => (
                     <li key={i} className="text-[10px] text-zinc-400 flex items-start gap-1.5 leading-normal">
@@ -365,23 +365,23 @@ export default function ContentGuidelinesSection() {
         </div>
 
         {/* SEARCHABLE GLOSSARY */}
-        <div className="bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-sm space-y-5 flex flex-col justify-between">
+        <div className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm space-y-5 flex flex-col justify-between font-sans">
           <div className="space-y-3">
-            <div className="flex items-center gap-2 border-b border-m3-outline/10 pb-3">
-              <span className="text-[10px] font-mono font-bold text-m3-primary bg-m3-secondary-container px-2.5 py-0.5 rounded-full">GLOSSARY</span>
-              <h4 className="text-sm font-bold text-m3-on-surface">MOBIUS 工业术语词汇表</h4>
+            <div className="flex items-center gap-2 border-b border-[#D2D2D7]/30 pb-3">
+              <span className="text-[10px] font-bold text-[#0071E3] bg-[#0071E3]/10 px-2.5 py-0.5 rounded-full">GLOSSARY</span>
+              <h4 className="text-sm font-bold text-[#1D1D1F]">ROCK-AI 工业术语词汇表</h4>
             </div>
             
             {/* Search Input and category filters */}
             <div className="space-y-2.5">
               <div className="relative">
-                <Search className="absolute left-3 top-2.5 w-4 h-4 text-m3-outline" />
+                <Search className="absolute left-3 top-2.5 w-4 h-4 text-[#86868B]" />
                 <input
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="搜索代码、定义或设计原则..."
-                  className="w-full text-xs pl-9 pr-4 py-2 border border-m3-outline/25 rounded-xl font-mono focus:ring-1 focus:ring-m3-primary bg-m3-muted-surface/30"
+                  className="w-full text-xs pl-9 pr-4 py-2 border border-[#D2D2D7]/40 rounded-xl font-mono focus:outline-none focus:ring-1 focus:ring-[#0071E3] bg-[#F5F5F7] text-[#1D1D1F]"
                 />
               </div>
 
@@ -397,8 +397,8 @@ export default function ContentGuidelinesSection() {
                     onClick={() => setCategoryFilter(cat.id as any)}
                     className={`text-[9px] font-bold border rounded-full px-2.5 py-1 transition-all cursor-pointer ${
                       categoryFilter === cat.id 
-                        ? 'bg-m3-primary text-white border-m3-primary' 
-                        : 'bg-white border-m3-outline/15 text-m3-outline hover:bg-m3-muted-surface'
+                        ? 'bg-[#0071E3] text-white border-[#0071E3]' 
+                        : 'bg-white border-[#D2D2D7]/50 text-[#86868B] hover:bg-[#F5F5F7]'
                     }`}
                   >
                     {cat.name}
@@ -411,23 +411,23 @@ export default function ContentGuidelinesSection() {
           {/* Search Result list */}
           <div className="flex-1 overflow-y-auto max-h-[220px] space-y-3.5 pr-1 mt-2">
             {filteredGlossary.length === 0 ? (
-              <p className="text-xs text-m3-outline text-center py-8">未找到匹配的学术/工业专用词条。</p>
+              <p className="text-xs text-[#86868B] text-center py-8">未找到匹配的学术/工业专用词条。</p>
             ) : (
               filteredGlossary.map((term, idx) => (
-                <div key={idx} className="border-b border-m3-outline/10 pb-3.5 space-y-1.5 last:border-0 last:pb-0">
+                <div key={idx} className="border-b border-[#D2D2D7]/30 pb-3.5 space-y-1.5 last:border-0 last:pb-0">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-m3-primary">{term.code}</span>
+                    <span className="font-mono text-xs font-bold text-[#0071E3]">{term.code}</span>
                     <span className={`text-[8px] font-mono font-bold uppercase px-2 py-0.5 rounded ${
                       term.category === 'safety' ? 'bg-red-50 text-red-700' : term.category === 'ui' ? 'bg-blue-50 text-blue-700' : 'bg-purple-50 text-purple-700'
                     }`}>
                       {term.category}
                     </span>
                   </div>
-                  <div className="text-xs font-extrabold text-m3-on-surface">
-                    {term.chinese} <span className="text-m3-outline font-mono text-[10px] font-normal">/ {term.english}</span>
+                  <div className="text-xs font-bold text-[#1D1D1F]">
+                    {term.chinese} <span className="text-[#86868B] font-mono text-[10px] font-normal">/ {term.english}</span>
                   </div>
-                  <p className="text-[11px] text-m3-outline leading-relaxed">{term.definition}</p>
-                  <p className="text-[10px] text-m3-primary leading-normal italic font-mono bg-m3-secondary-container/20 p-2 rounded-lg border border-m3-primary/10">
+                  <p className="text-[11px] text-[#86868B] leading-relaxed">{term.definition}</p>
+                  <p className="text-[10px] text-[#0071E3] leading-normal italic font-mono bg-[#0071E3]/5 p-2 rounded-lg border border-[#0071E3]/10">
                     <span className="font-bold">设计准则：</span>{term.rationale}
                   </p>
                 </div>

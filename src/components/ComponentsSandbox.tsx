@@ -2,6 +2,12 @@ import React, { useState, useRef } from 'react';
 import { Copy, Check, MousePointerClick, RefreshCw, Smartphone, Eye, Sparkles, Shield, AlertCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 
+// Import shadcn/ui components
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+
 export default function ComponentsSandbox() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   
@@ -14,9 +20,9 @@ export default function ComponentsSandbox() {
   const [tempTitle, setTempTitle] = useState(cardTitle);
   const titleInputRef = useRef<HTMLInputElement>(null);
 
-  // M3 Inputs State
-  const [m3InputValue, setM3InputValue] = useState('');
-  const [m3InputFocused, setM3InputFocused] = useState(false);
+  // Apple Inputs State
+  const [appleInputValue, setAppleInputValue] = useState('');
+  const [appleInputFocused, setAppleInputFocused] = useState(false);
 
   const handleCopy = (text: string, id: string) => {
     navigator.clipboard.writeText(text);
@@ -43,96 +49,98 @@ export default function ComponentsSandbox() {
   };
 
   return (
-    <div id="components-sandbox" className="space-y-8 animate-fade-in">
+    <div id="components-sandbox" className="space-y-8 animate-fade-in font-sans">
       
       {/* SECTION 1: BUTTONS STATE ENGINE */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        {/* Left Interactive Button Console */}
-        <div className="lg:col-span-7 bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-[0_4px_16px_rgba(103,80,164,0.03)] flex flex-col justify-between">
+        {/* Left Interactive Button Console using shadcn/ui Card */}
+        <Card className="lg:col-span-7 bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
           <div className="space-y-4">
-            <div className="flex justify-between items-center border-b border-m3-outline/10 pb-3">
+            <div className="flex justify-between items-center border-b border-[#D2D2D7]/30 pb-3 gap-2">
               <div>
-                <h3 className="text-base font-bold text-m3-on-surface font-serif">按钮物理交互与 <span className="italic text-m3-primary font-serif">状态对比</span></h3>
-                <p className="text-xs text-m3-outline mt-1 font-sans">测试不同设计系统下状态层的视觉演绎</p>
+                <CardTitle className="text-base font-bold text-[#1D1D1F]">
+                  按钮物理交互与 <span className="text-[#0071E3]">状态对比</span>
+                </CardTitle>
+                <CardDescription className="text-xs text-[#86868B] mt-1">
+                  测试不同设计系统下状态层的视觉演绎
+                </CardDescription>
               </div>
-              <span className="text-[10px] bg-m3-primary/10 text-m3-primary border border-m3-primary/20 px-2.5 py-1 rounded-xl font-mono font-bold uppercase">
+              <Badge variant="secondary" className="font-mono text-[10px] font-bold uppercase py-1 px-2.5 rounded-lg border border-[#0071E3]/10 bg-[#0071E3]/5 text-[#0071E3]">
                 STATE DETECTOR: {buttonState.toUpperCase()}
-              </span>
+              </Badge>
             </div>
 
             {/* Sandbox Playground */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-6 border-b border-m3-outline/10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-6 border-b border-[#D2D2D7]/30">
               
-              {/* ROAK-AI Button Box */}
-              <div className="bg-[#131118] rounded-2xl p-5 border border-m3-outline/20 space-y-4 flex flex-col justify-between min-h-[190px]">
+              {/* Apple HIG Button Box */}
+              <div className="bg-[#1D1D1F] rounded-xl p-5 border border-[#D2D2D7]/30 space-y-4 flex flex-col justify-between min-h-[190px]">
                 <div>
                   <div className="flex justify-between items-center mb-4">
-                    <span className="text-[10px] font-mono font-bold text-m3-outline">ROCK-AI BUTTON (MOBIUS)</span>
-                    <span className="w-2 h-2 bg-m3-primary rounded-full"></span>
+                    <span className="text-[10px] font-mono font-bold text-[#86868B]">APPLE HIG COMPLIANT BUTTON</span>
+                    <span className="w-2 h-2 bg-[#0071E3] rounded-full"></span>
                   </div>
                   
-                  {/* Interactive ROAK Button */}
-                  <button
-                    id="roak-interactive-btn"
+                  {/* Interactive Apple HIG Button */}
+                  <Button
+                    id="apple-interactive-btn"
                     onMouseEnter={() => setButtonState('hover')}
                     onMouseLeave={() => setButtonState('rest')}
                     onMouseDown={() => setButtonState('pressed')}
                     onMouseUp={() => setButtonState('hover')}
                     onFocus={() => setButtonState('focused')}
                     onBlur={() => setButtonState('rest')}
-                    className="w-full py-3 px-4 rounded border transition-all duration-150 text-xs font-mono font-bold flex items-center justify-center gap-2 cursor-pointer
-                      bg-[#1a1820] text-zinc-100 border-zinc-700 hover:bg-m3-primary hover:text-white hover:border-m3-primary hover:shadow-md hover:shadow-purple-950/40 hover:scale-[1.01]
-                      active:bg-[#4f378b] active:scale-[0.98]
-                      focus:ring-2 focus:ring-m3-primary focus:ring-offset-2 focus:ring-offset-[#131118] focus:outline-none"
+                    className="w-full py-3 px-4 rounded-xl border transition-all duration-150 text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer h-auto
+                      bg-[#0071E3] text-white border-transparent hover:bg-[#0071E3]/95 hover:shadow-sm hover:scale-[1.01]
+                      active:scale-[0.98]
+                      focus:ring-2 focus:ring-[#0071E3] focus:ring-offset-2 focus:ring-offset-[#1D1D1F] focus:outline-none"
                   >
                     <Shield className="w-4 h-4 shrink-0" />
                     <span>EXECUTE VEHICLE EMERGENCY STOP</span>
-                  </button>
+                  </Button>
                 </div>
 
-                <div className="text-[10px] font-mono text-m3-outline leading-normal border-t border-m3-outline/10 pt-2">
-                  <strong>ROAK 规范：</strong> 1px 机械边框，大面积点击盒模型，重压时尺寸微缩 (scale: 0.98)。
+                <div className="text-[10px] font-mono text-[#86868B] leading-normal border-t border-[#D2D2D7]/20 pt-2">
+                  <strong>Apple 规范：</strong> 采用圆角边框、高饱和主色与重压时微缩反馈。
                 </div>
               </div>
 
-              {/* M3 Buttons Box */}
-              <div className="bg-m3-primary/5 rounded-[24px] p-5 border border-m3-outline/10 space-y-4 flex flex-col justify-between min-h-[190px]">
+              {/* Muted System Buttons Box */}
+              <div className="bg-[#F5F5F7] rounded-xl p-5 border border-[#D2D2D7]/50 space-y-4 flex flex-col justify-between min-h-[190px]">
                 <div>
                   <div className="flex justify-between items-center mb-4">
-                    <span className="text-[10px] font-mono font-bold text-m3-primary">MATERIAL 3 BUTTONS</span>
-                    <span className="w-2 h-2 bg-m3-primary rounded-full"></span>
+                    <span className="text-[10px] font-mono font-bold text-[#86868B]">SYSTEM CONTROL BUTTONS</span>
+                    <span className="w-2 h-2 bg-zinc-400 rounded-full"></span>
                   </div>
 
-                  {/* Interactive M3 Filled Button */}
+                  {/* Interactive Muted Buttons */}
                   <div className="space-y-2">
-                    <button
-                      id="m3-filled-btn"
+                    <Button
+                      id="apple-prominent-btn"
                       onMouseEnter={() => setButtonState('hover')}
                       onMouseLeave={() => setButtonState('rest')}
                       onMouseDown={() => setButtonState('pressed')}
                       onMouseUp={() => setButtonState('hover')}
                       onFocus={() => setButtonState('focused')}
                       onBlur={() => setButtonState('rest')}
-                      className="w-full py-2.5 px-5 bg-m3-primary hover:bg-[#533c8c] text-white rounded-full text-xs font-semibold tracking-wide shadow-sm hover:shadow-md transition-all cursor-pointer relative overflow-hidden"
+                      className="w-full py-2.5 px-5 bg-white hover:bg-[#F5F5F7] text-[#1D1D1F] rounded-xl border border-[#D2D2D7] text-xs font-semibold shadow-sm transition-all cursor-pointer relative overflow-hidden h-auto"
                     >
-                      {/* State overlay simulator */}
-                      <span className="absolute inset-0 bg-white opacity-0 hover:opacity-[0.08] active:opacity-[0.12] transition-opacity"></span>
-                      Filled Tonal Action
-                    </button>
+                      Prominent Action
+                    </Button>
 
-                    {/* Elevated Button */}
-                    <button
-                      id="m3-elevated-btn"
-                      className="w-full py-2 px-5 bg-white border border-m3-outline/15 text-m3-primary rounded-full text-xs font-semibold shadow-[0_2px_8px_rgba(103,80,164,0.06)] hover:shadow-md hover:bg-m3-primary/5 transition-all cursor-pointer"
+                    {/* Secondary Button */}
+                    <Button
+                      id="apple-secondary-btn"
+                      className="w-full py-2 px-5 bg-transparent hover:bg-[#D2D2D7]/20 text-[#0071E3] rounded-xl border border-transparent text-xs font-semibold transition-all cursor-pointer h-auto"
                     >
-                      Elevated Button
-                    </button>
+                      Secondary Link Button
+                    </Button>
                   </div>
                 </div>
 
-                <div className="text-[10px] font-mono text-m3-outline leading-normal border-t border-m3-outline/10 pt-2">
-                  <strong>M3 规范：</strong> 采用全圆角胶囊（Rounded Full），内置状态叠加层（State overlay），优雅大气。
+                <div className="text-[10px] font-mono text-[#86868B] leading-normal border-t border-[#D2D2D7]/20 pt-2">
+                  <strong>反馈规范：</strong> 强调扁平极简布局与半透明高亮，触控感知清晰且温和。
                 </div>
               </div>
 
@@ -140,63 +148,65 @@ export default function ComponentsSandbox() {
           </div>
 
           {/* Quick Code Copier */}
-          <div className="bg-m3-muted-surface p-4 rounded-2xl border border-m3-outline/10 mt-4 flex items-center justify-between text-xs">
-            <span className="text-m3-outline font-mono">Tailwind Snippet (ROAK Button)</span>
-            <button
-              onClick={() => handleCopy(`className="py-3 px-4 bg-[#1a1820] border border-zinc-700 hover:bg-m3-primary hover:text-white hover:scale-[1.01] active:scale-[0.98] focus:ring-2 focus:ring-m3-primary rounded text-xs font-mono font-bold transition-all duration-150 cursor-pointer"`, 'btn-code')}
-              className="px-3.5 py-1.5 bg-white hover:bg-m3-primary/5 border border-m3-outline/15 rounded-xl text-[11px] font-semibold text-m3-on-surface flex items-center gap-1.5 cursor-pointer transition-colors"
+          <div className="bg-[#F5F5F7] p-4 rounded-xl border border-[#D2D2D7]/40 mt-4 flex items-center justify-between text-xs">
+            <span className="text-[#86868B] font-mono">Tailwind Snippet (Apple Button)</span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handleCopy(`className="py-3 px-4 bg-[#0071E3] hover:bg-[#0071E3]/95 text-white hover:scale-[1.01] active:scale-[0.98] focus:ring-2 focus:ring-[#0071E3] rounded-xl text-xs font-semibold transition-all duration-150 cursor-pointer"`, 'btn-code')}
+              className="px-3.5 py-1.5 bg-white hover:bg-[#F5F5F7] border border-[#D2D2D7] rounded-xl text-[11px] font-semibold text-[#1D1D1F] flex items-center gap-1.5 cursor-pointer transition-colors h-auto"
             >
-              {copiedId === 'btn-code' ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5 text-m3-outline" />}
+              {copiedId === 'btn-code' ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5 text-[#86868B]" />}
               {copiedId === 'btn-code' ? '已复制' : '复制样式类'}
-            </button>
+            </Button>
           </div>
-        </div>
+        </Card>
 
         {/* Right Detail Console (Interactive States Explained) */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="bg-[#131118] text-zinc-100 rounded-[28px] p-6 border border-m3-outline/20 space-y-4">
-            <h4 className="text-xs font-mono font-bold text-m3-outline uppercase tracking-widest">
-              状态机机制详解 (ROAK vs M3)
+          <div className="bg-[#1D1D1F] text-[#F5F5F7] rounded-2xl p-6 border border-[#D2D2D7]/30 space-y-4">
+            <h4 className="text-xs font-semibold text-[#86868B] uppercase tracking-wider">
+              状态机物理回馈详解
             </h4>
             
             <div className="space-y-3.5">
               {/* REST STATE */}
               <div className={`p-4 border transition-all duration-300 ${
-                buttonState === 'rest' ? 'bg-[#201d29] border-m3-primary/45 shadow-lg rounded-2xl' : 'bg-zinc-950/25 border-transparent opacity-60 rounded-xl'
+                buttonState === 'rest' ? 'bg-[#2C2C2E] border-[#0071E3]/40 shadow-sm rounded-xl' : 'bg-transparent border-transparent opacity-60 rounded-xl'
               }`}>
                 <span className="text-xs font-mono font-bold text-zinc-300 block">REST (静止/默认状态)</span>
-                <p className="text-[11px] text-zinc-400 mt-1 font-sans leading-relaxed">
-                  ROAK 使用 1px 细边框进行极强的数据边缘框定，不使用多余渐变；M3 使用平铺或轻微高度色阶体现自然融合。
+                <p className="text-[11px] text-zinc-400 mt-1 leading-relaxed">
+                  Apple 倾向采用极简实色背景对齐，高饱和蓝色凸显重要度，不留冗余的线性渐变以确保最本质的数据阅读。
                 </p>
               </div>
 
               {/* HOVER STATE */}
               <div className={`p-4 border transition-all duration-300 ${
-                buttonState === 'hover' ? 'bg-[#231b30] border-m3-primary/45 shadow-lg rounded-2xl' : 'bg-zinc-950/25 border-transparent opacity-60 rounded-xl'
+                buttonState === 'hover' ? 'bg-[#2C2C2E] border-[#0071E3]/40 shadow-sm rounded-xl' : 'bg-transparent border-transparent opacity-60 rounded-xl'
               }`}>
-                <span className="text-xs font-mono font-bold text-m3-primary block">HOVER (悬停高亮状态)</span>
-                <p className="text-[11px] text-zinc-400 mt-1 font-sans leading-relaxed">
-                  ROAK 要求悬停时背景色突变并稍微拉伸点击盒外圈，形成高对比强反馈；M3 通过在表面叠加 8% 的半透明主色层来优雅表现。
+                <span className="text-xs font-mono font-bold text-[#0071E3] block">HOVER (悬停状态)</span>
+                <p className="text-[11px] text-zinc-400 mt-1 leading-relaxed">
+                  通过在组件顶部增加不透明度叠层，触发深色卡片略带辉光的变色高亮，确保在不打扰底板对比度时优雅示意。
                 </p>
               </div>
 
               {/* PRESSED STATE */}
               <div className={`p-4 border transition-all duration-300 ${
-                buttonState === 'pressed' ? 'bg-[#2e1c2a] border-amber-500/40 shadow-lg rounded-2xl' : 'bg-zinc-950/25 border-transparent opacity-60 rounded-xl'
+                buttonState === 'pressed' ? 'bg-[#2C2C2E] border-amber-500/40 shadow-sm rounded-xl' : 'bg-transparent border-transparent opacity-60 rounded-xl'
               }`}>
-                <span className="text-xs font-mono font-bold text-amber-400 block">PRESSED (按下物理按压感)</span>
-                <p className="text-[11px] text-zinc-400 mt-1 font-sans leading-relaxed">
-                  ROAK 强制按钮整体稍微缩水 (scale-[0.98])，以模拟手指或鼠标真实按压的机械响应；M3 会叠加 12% 状态层并启动扩散的水波纹（Ripple）动画。
+                <span className="text-xs font-mono font-bold text-amber-400 block">PRESSED (按压物理震动)</span>
+                <p className="text-[11px] text-zinc-400 mt-1 leading-relaxed">
+                  使用精确的 CSS 触控反馈参数：尺寸缩小 2%，产生向内回凹效果，以完美的线性缩放传达物理世界的触感。
                 </p>
               </div>
 
               {/* FOCUS STATE */}
               <div className={`p-4 border transition-all duration-300 ${
-                buttonState === 'focused' ? 'bg-[#10241f] border-emerald-500/40 shadow-lg rounded-2xl' : 'bg-zinc-950/25 border-transparent opacity-60 rounded-xl'
+                buttonState === 'focused' ? 'bg-[#2C2C2E] border-emerald-500/40 shadow-sm rounded-xl' : 'bg-transparent border-transparent opacity-60 rounded-xl'
               }`}>
-                <span className="text-xs font-mono font-bold text-emerald-400 block">FOCUS (焦点无障碍)</span>
-                <p className="text-[11px] text-zinc-400 mt-1 font-sans leading-relaxed">
-                  ROAK 必须配备明显的 2px 高反差轮廓环（环外侧间隙 2px），保护纯键盘高频录入人员的安全；M3 展现为 1px 圆形轨道包络。
+                <span className="text-xs font-mono font-bold text-emerald-400 block">FOCUS (无障碍对齐焦点)</span>
+                <p className="text-[11px] text-zinc-400 mt-1 leading-relaxed">
+                  外侧弹出标准的 2px 高对比聚焦提示边缘线，从而极大地帮助低视力群体与高频纯键盘录入员的安全性。
                 </p>
               </div>
             </div>
@@ -208,39 +218,39 @@ export default function ComponentsSandbox() {
       {/* SECTION 2: INPUTS AND ON-DEMAND PATTERN */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        {/* ROAK On-Demand Text Input (The renameable card example) */}
-        <div className="lg:col-span-6 bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-[0_4px_16px_rgba(103,80,164,0.03)] space-y-4">
-          <div>
-            <span className="text-[10px] font-mono font-bold text-m3-primary uppercase tracking-wider block">
-              ROAK-AI EXCLUSIVE PATTERN
+        {/* Apple On-Demand Text Input (The renameable card example) using shadcn/ui Card */}
+        <Card className="lg:col-span-6 bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm space-y-4">
+          <CardHeader className="p-0">
+            <span className="text-[10px] font-mono font-bold text-[#0071E3] uppercase tracking-wider block">
+              APPLE EXCLUSIVE INPUT PATTERN
             </span>
-            <h3 className="text-base font-bold text-m3-on-surface mt-1 font-serif">
-              On-Demand Text Input <span className="italic text-m3-primary font-serif">(在静止时看起来像文本按钮)</span>
-            </h3>
-            <p className="text-xs text-m3-outline mt-1 leading-relaxed">
-              为了精简复杂的工业看板信息，可重命名的标题或静态指标<strong>不应默认放置笨重的输入框</strong>。常态下其外观和排版完美融合于文本，当悬停、激活时无缝变换为高亮输入栏。
-            </p>
-          </div>
+            <CardTitle className="text-base font-bold text-[#1D1D1F] mt-1">
+              On-Demand Text Input <span className="text-[#0071E3] font-normal">(在静止时看起来像文本)</span>
+            </CardTitle>
+            <CardDescription className="text-xs text-[#86868B] leading-relaxed mt-1">
+              为了精简复杂的监控看板信息，可重命名的标题或静态指标<strong>不应默认放置笨重的输入框</strong>。常态下其外观和排版完美融合于文本，当悬停、激活时无缝变换为高亮输入栏。
+            </CardDescription>
+          </CardHeader>
 
           {/* Interactive Card with On-Demand renaming */}
-          <div className="bg-m3-muted-surface border border-m3-outline/10 rounded-2xl p-5 space-y-4">
-            <div className="flex items-center justify-between border-b border-m3-outline/10 pb-3">
-              <span className="text-[10px] font-mono font-bold text-m3-outline">VEHICLE PROFILE CARD</span>
-              <span className="text-xs bg-emerald-500/10 text-emerald-700 font-bold px-2 py-0.5 border border-emerald-500/20 rounded-lg">
+          <div className="bg-[#F5F5F7] border border-[#D2D2D7]/40 rounded-xl p-5 space-y-4">
+            <div className="flex items-center justify-between border-b border-[#D2D2D7]/30 pb-3">
+              <span className="text-[10px] font-mono font-bold text-[#86868B]">VEHICLE PROFILE CARD</span>
+              <Badge className="text-xs bg-emerald-500/10 text-emerald-700 font-bold px-2 py-0.5 border border-emerald-500/20 rounded-lg shadow-none">
                 运行中
-              </span>
+              </Badge>
             </div>
 
             {/* Renameable area using On-Demand Pattern */}
             <div className="space-y-1">
-              <label className="text-[10px] font-mono font-bold text-m3-outline uppercase tracking-widest">
+              <label className="text-[10px] font-mono font-bold text-[#86868B] uppercase tracking-widest">
                 资产名称 (点击编辑)
               </label>
               
               {isEditingTitle ? (
                 <div className="flex items-center gap-2">
-                  <input
-                    ref={titleInputRef}
+                  <Input
+                    ref={titleInputRef as any}
                     type="text"
                     value={tempTitle}
                     onChange={(e) => setTempTitle(e.target.value)}
@@ -252,24 +262,24 @@ export default function ComponentsSandbox() {
                         setIsEditingTitle(false);
                       }
                     }}
-                    className="w-full bg-white border-2 border-m3-primary rounded-xl px-3 py-1.5 text-sm font-bold text-m3-on-surface focus:outline-none focus:ring-0 font-sans"
+                    className="w-full bg-white border-2 border-[#0071E3] rounded-xl px-3 py-1.5 text-sm font-bold text-[#1D1D1F] focus-visible:ring-0 focus-visible:ring-offset-0 font-sans h-9"
                   />
-                  <button
+                  <Button
                     onClick={handleTitleSubmit}
-                    className="px-3.5 py-1.5 bg-m3-primary hover:bg-[#533c8c] text-white rounded-xl text-xs font-bold cursor-pointer transition-colors shrink-0"
+                    className="px-3.5 py-1.5 bg-[#0071E3] hover:bg-[#0071E3]/95 text-white rounded-xl text-xs font-semibold cursor-pointer transition-colors shrink-0 h-9"
                   >
                     保存
-                  </button>
+                  </Button>
                 </div>
               ) : (
                 <div
                   id="on-demand-title-btn"
                   onClick={startEditingTitle}
-                  className="group flex items-center justify-between rounded-xl p-2 hover:bg-m3-primary/5 cursor-pointer border border-dashed border-transparent hover:border-m3-primary/25 transition-all"
+                  className="group flex items-center justify-between rounded-xl p-2 hover:bg-[#0071E3]/5 cursor-pointer border border-dashed border-transparent hover:border-[#0071E3]/25 transition-all"
                   title="点击开始编辑此指标"
                 >
-                  <span className="text-sm font-bold text-m3-on-surface font-sans">{cardTitle}</span>
-                  <span className="text-[10px] text-m3-primary font-mono font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-sm font-bold text-[#1D1D1F]">{cardTitle}</span>
+                  <span className="text-[10px] text-[#0071E3] font-mono font-bold opacity-0 group-hover:opacity-100 transition-opacity">
                     [编辑名称]
                   </span>
                 </div>
@@ -278,58 +288,58 @@ export default function ComponentsSandbox() {
 
             {/* Dummy telemetry lines to anchor the design */}
             <div className="grid grid-cols-2 gap-3 pt-2 text-xs">
-              <div className="bg-white p-3.5 rounded-xl border border-m3-outline/10 shadow-[0_2px_8px_rgba(103,80,164,0.01)]">
-                <span className="text-[10px] text-m3-outline block font-mono">BATTERY VOLT</span>
-                <span className="font-mono font-bold text-m3-on-surface">412.5 V</span>
+              <div className="bg-white p-3.5 rounded-xl border border-[#D2D2D7]/40 shadow-sm">
+                <span className="text-[10px] text-[#86868B] block font-mono">BATTERY VOLT</span>
+                <span className="font-mono font-bold text-[#1D1D1F]">412.5 V</span>
               </div>
-              <div className="bg-white p-3.5 rounded-xl border border-m3-outline/10 shadow-[0_2px_8px_rgba(103,80,164,0.01)]">
-                <span className="text-[10px] text-m3-outline block font-mono">GPS DEVIATION</span>
-                <span className="font-mono font-bold text-m3-on-surface">±0.04 m</span>
+              <div className="bg-white p-3.5 rounded-xl border border-[#D2D2D7]/40 shadow-sm">
+                <span className="text-[10px] text-[#86868B] block font-mono">GPS DEVIATION</span>
+                <span className="font-mono font-bold text-[#1D1D1F]">±0.04 m</span>
               </div>
             </div>
           </div>
 
-          <p className="text-[11px] text-m3-outline leading-normal italic font-sans bg-m3-primary/5 p-4 rounded-2xl border border-m3-outline/5">
-            * <strong>交互提示：</strong> 鼠标滑过资产卡片上的标题，体会从静态表格指标到活跃输入框的无缝过渡。这减少了常规工业监控画面的拥挤感。
+          <p className="text-[11px] text-[#86868B] leading-normal italic bg-[#0071E3]/5 p-4 rounded-xl border border-[#0071E3]/10">
+            * <strong>交互提示：</strong> 鼠标滑过资产卡片上的标题，体会从静态表格指标到活跃输入框的无缝过渡。这大大减少了常规工业监控画面的拥挤感。
           </p>
-        </div>
+        </Card>
 
-        {/* M3 Standard Input Fields */}
-        <div className="lg:col-span-6 bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-[0_4px_16px_rgba(103,80,164,0.03)] space-y-4">
-          <div>
-            <span className="text-[10px] font-mono font-bold text-m3-primary block">
-              MATERIAL DESIGN 3 STANDARD
+        {/* Apple Standard Input Fields using shadcn/ui Card */}
+        <Card className="lg:col-span-6 bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm space-y-4">
+          <CardHeader className="p-0">
+            <span className="text-[10px] font-mono font-bold text-[#0071E3] block">
+              APPLE DESIGN STANDARD INPUTS
             </span>
-            <h3 className="text-base font-bold text-m3-on-surface mt-1 font-serif">
-              Filled & Outlined Inputs <span className="italic text-m3-primary font-serif">(M3 标准输入框)</span>
-            </h3>
-            <p className="text-xs text-m3-outline mt-1 leading-relaxed">
-              M3 重视无障碍与触控空间。文本输入框必须有明确的聚焦高亮色、圆角结构，以及<strong>在聚焦时自动平滑上浮</strong>的悬浮浮动标签（Floating Label）。
-            </p>
-          </div>
+            <CardTitle className="text-base font-bold text-[#1D1D1F] mt-1">
+              macOS System Inputs <span className="text-[#0071E3] font-normal">(苹果标准输入框)</span>
+            </CardTitle>
+            <CardDescription className="text-xs text-[#86868B] leading-relaxed mt-1">
+              Apple 重视无障碍与触控空间。文本输入框必须有明确的聚焦高亮色、圆角结构，以及<strong>在聚焦时自动平滑高亮</strong>的优雅浅灰色边框。
+            </CardDescription>
+          </CardHeader>
 
-          <div className="bg-m3-muted-surface border border-m3-outline/10 rounded-2xl p-5 space-y-6">
-            {/* Outlined M3 Text Field with Floating Label Simulator */}
+          <div className="bg-[#F5F5F7] border border-[#D2D2D7]/40 rounded-xl p-5 space-y-6">
+            {/* Outlined Apple Text Field with Floating Label Simulator */}
             <div className="relative mt-2">
-              <input
+              <Input
                 type="text"
-                value={m3InputValue}
-                onChange={(e) => setM3InputValue(e.target.value)}
-                onFocus={() => setM3InputFocused(true)}
-                onBlur={() => setM3InputFocused(m3InputValue.length > 0)}
-                className={`w-full px-4 py-3 bg-white border rounded-xl text-sm text-m3-on-surface transition-all focus:outline-none ${
-                  m3InputFocused 
-                    ? 'border-m3-primary ring-1 ring-m3-primary' 
-                    : 'border-m3-outline/25 hover:border-m3-primary/30'
+                value={appleInputValue}
+                onChange={(e) => setAppleInputValue(e.target.value)}
+                onFocus={() => setAppleInputFocused(true)}
+                onBlur={() => setAppleInputFocused(appleInputValue.length > 0)}
+                className={`w-full px-4 py-3 bg-white border rounded-xl text-sm text-[#1D1D1F] transition-all focus-visible:outline-none h-11 ${
+                  appleInputFocused 
+                    ? 'border-[#0071E3] ring-1 ring-[#0071E3]' 
+                    : 'border-[#D2D2D7] hover:border-[#0071E3]/30'
                 }`}
               />
               
               {/* Animated Floating Label */}
               <label 
                 className={`absolute left-3 transition-all pointer-events-none ${
-                  m3InputFocused || m3InputValue.length > 0
-                    ? '-top-2.5 px-1.5 bg-white text-[10px] font-bold text-m3-primary rounded'
-                    : 'top-3 text-sm text-m3-outline'
+                  appleInputFocused || appleInputValue.length > 0
+                    ? '-top-2.5 px-1.5 bg-white text-[10px] font-bold text-[#0071E3] rounded'
+                    : 'top-3 text-sm text-[#86868B]'
                 }`}
               >
                 Enter destination waypoint
@@ -337,33 +347,33 @@ export default function ComponentsSandbox() {
             </div>
 
             {/* Static Filled variant demo */}
-            <div className="bg-white border border-m3-outline/10 border-b-2 border-b-m3-primary rounded-xl p-3.5 relative flex flex-col justify-between h-14 hover:bg-m3-primary/5 transition-colors">
-              <span className="text-[10px] font-bold text-m3-primary font-mono">OPERATOR LICENSE KEY</span>
-              <span className="text-sm text-m3-on-surface font-mono">OP-88219-X9</span>
+            <div className="bg-white border border-[#D2D2D7]/40 border-b-2 border-b-[#0071E3] rounded-xl p-3.5 relative flex flex-col justify-between h-14 hover:bg-[#0071E3]/5 transition-colors">
+              <span className="text-[10px] font-bold text-[#0071E3] font-mono">OPERATOR LICENSE KEY</span>
+              <span className="text-sm text-[#1D1D1F] font-mono">OP-88219-X9</span>
             </div>
           </div>
 
-          <p className="text-[11px] text-m3-outline leading-relaxed font-sans bg-m3-primary/5 p-4 rounded-2xl border border-m3-outline/5">
-            <strong>M3 对比分析：</strong> M3 的上浮标签是多表单填写场景下的黄金准则，但在高度压缩的工业表格、属性网格中，过高的组件深度容易耗尽垂直像素空间。
+          <p className="text-[11px] text-[#86868B] leading-relaxed bg-[#0071E3]/5 p-4 rounded-xl border border-[#0071E3]/10">
+            <strong>设计分析：</strong> 自然、谦逊的 Apple 扁平式高显框不仅能完美融于各项重载列表内，且对于中老年矿工等特殊群体的辨识效率也是首屈一指。
           </p>
-        </div>
+        </Card>
 
       </div>
 
       {/* SECTION 3: SVG ICON SPECIFICATIONS (PIXEL ALIGN) */}
-      <div className="bg-white border border-m3-outline/15 rounded-[28px] p-6 shadow-[0_4px_16px_rgba(103,80,164,0.03)] space-y-6">
+      <div className="bg-white border border-[#D2D2D7]/50 rounded-2xl p-6 shadow-sm space-y-6">
         <div>
-          <h3 className="text-base font-bold text-m3-on-surface font-serif">
-            矢量图标设计规范：<span className="italic text-m3-primary font-serif">几何化与 2px 像素对齐</span>
+          <h3 className="text-base font-bold text-[#1D1D1F]">
+            矢量图标设计规范：<span className="text-[#0071E3]">几何化与 2px 像素对齐</span>
           </h3>
-          <p className="text-xs text-m3-outline mt-1 leading-relaxed">
-            ROAK-AI 系统对自定义 SVG 图标有严苛的要求。在可能的情况下，图标所有端点和笔画必须对齐至像素网格，推荐使用 <strong>2px 粗笔描边</strong>，绝对禁止不合时宜的多余外圈装饰。
+          <p className="text-xs text-[#86868B] mt-1 leading-relaxed">
+            ROCK-AI 系统对自定义 SVG 图标有严苛的要求。在可能的情况下，图标所有端点和笔画必须对齐至像素网格，推荐使用 <strong>2px 粗笔描边</strong>，绝对禁止不合时宜的多余外圈装饰。
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-m3-outline/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-[#D2D2D7]/30">
           {/* Good practice */}
-          <div className="bg-emerald-500/5 border border-emerald-500/15 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-6">
+          <div className="bg-emerald-500/5 border border-emerald-500/15 rounded-xl p-5 flex flex-col md:flex-row items-center gap-6">
             {/* SVG illustration */}
             <div className="w-24 h-24 bg-white rounded-xl border border-emerald-500/25 flex items-center justify-center relative shadow-sm shrink-0">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -380,14 +390,14 @@ export default function ComponentsSandbox() {
               <span className="text-xs font-mono font-bold text-emerald-700 uppercase flex items-center gap-1">
                 <Check className="w-4 h-4" /> IDEAL (符合规范)
               </span>
-              <p className="text-xs text-m3-on-surface leading-relaxed font-sans">
+              <p className="text-xs text-[#1D1D1F] leading-relaxed">
                 使用纯直角/圆形几何形状。矢量笔刷端点设为直角（Square），且完美的对齐像素分割点，这保证了在任意低清晰度显示屏上图标依然极其边缘清晰，拒绝发虚。
               </p>
             </div>
           </div>
 
           {/* Bad practice */}
-          <div className="bg-red-500/5 border border-red-500/15 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-6">
+          <div className="bg-red-500/5 border border-red-500/15 rounded-xl p-5 flex flex-col md:flex-row items-center gap-6">
             {/* SVG illustration */}
             <div className="w-24 h-24 bg-white rounded-xl border border-red-500/25 flex items-center justify-center relative shadow-sm shrink-0">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" opacity="0.6">
@@ -404,7 +414,7 @@ export default function ComponentsSandbox() {
               <span className="text-xs font-mono font-bold text-red-700 uppercase flex items-center gap-1">
                 <AlertCircle className="w-4 h-4" /> AVOID (避免的做法)
               </span>
-              <p className="text-xs text-m3-on-surface leading-relaxed font-sans">
+              <p className="text-xs text-[#1D1D1F] leading-relaxed">
                 避免无谓的外装饰圆（Concentric Circles）。1px 笔刷在微型栅格化时极易因子像素采样而变成一团模糊虚边，导致识别效率暴降，操作员容易发生视觉疲劳。
               </p>
             </div>
